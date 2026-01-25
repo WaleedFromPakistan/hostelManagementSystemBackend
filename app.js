@@ -1,11 +1,48 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
+const dotenv = require("dotenv");
+const morgan = require("morgan");
+const rateLimit = require("express-rate-limit");
 
+const connectDB = require("./config/db");
+
+// Load env variables
+dotenv.config();
+
+// Initialize app
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello from hostel management system');
+// Connect Database
+connectDB();
+
+// Global Middlewares
+app.use(express.json());
+app.use(cors());
+app.use(helmet());
+app.use(morgan("dev"));
+
+// Rate Limiter (basic protection)
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP
+});
+app.use(limiter);
+
+// Routes
+app.use("/api/permissions", require("./routes/permission.routes"));
+app.use("/api/roles", require("./routes/role.routes"));
+app.use("/api/auth", require("./routes/auth.routes"));
+app.use("/api/users", require("./routes/user.routes"));
+// Health check route (optional but smart)
+app.get("/", (req, res) => {
+  res.json({ status: "API running" });
 });
 
-app.listen(4000, () => {
-    console.log('Server is running on port 4000');
+// Server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
+
+module.exports = app;

@@ -1,0 +1,527 @@
+====================================
+            Auth ✅
+====================================
+POST /api/auth/signup
+    ===structure===
+        {
+            "fullName": "Muhammad Waleed",
+            "email": "waleed@gmail.com",
+            "password": "waleed@123",
+            "roleId": "6974e0ea55708f7526eb8b8d",
+            "phone": "03111222333",
+            "isActive":true
+        }
+
+    ===Reponse===
+        {
+            "message": "User created successfully",
+            "userId": "6974e55a276808eac7358b69"
+        }
+POST /api/auth/login
+    ===structure===
+        {
+    
+            "email": "waleed@gmail.com",
+            "password": "waleed@123" 
+        }
+
+    ===Reponse===
+        {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+            "user": {
+                        "id": "6974e55a276808eac7358b69",
+                        "fullName": "Muhammad Waleed",
+                        "email": "waleed@gmail.com",
+                        "role": "ADMIN"
+                    }
+        }
+
+
+====================================
+            User ✅
+====================================
+GET /api/usrers/profile
+    ===structure===
+        {
+         
+        }
+
+    ===Reponse===
+        {
+            "_id": "6974e55a276808eac7358b69",
+            "fullName": "Muhammad Waleed",
+            "email": "waleed@gmail.com",
+            "role": {
+                        "_id": "6974e0ea55708f7526eb8b8d",
+                        "name": "Admin",
+                        "code": "ADMIN"
+                    },
+            "phone": "03111222333",
+            "isActive": true,
+            "createdAt": "2026-01-24T15:29:30.664Z",
+            "updatedAt": "2026-01-24T15:29:30.664Z",
+            "__v": 0
+        }
+
+GET /api/user/
+    ===structure===
+        {
+    
+        }
+
+    ===Reponse===
+       [
+            {
+                "_id": "6974e55a276808eac7358b69",
+                "fullName": "Muhammad Waleed",
+                "email": "waleed@gmail.com",
+                "role": {
+                            "_id": "6974e0ea55708f7526eb8b8d",
+                            "name": "Admin",
+                            "code": "ADMIN"
+                        },
+                "phone": "03111222333",
+                "isActive": true,
+                "createdAt": "2026-01-24T15:29:30.664Z",
+                "updatedAt": "2026-01-24T15:29:30.664Z",                "__v": 0
+            }  
+        ]
+
+
+GET /api/user/:id
+    ===structure===
+        {
+    
+        }
+
+    ===Reponse===
+       [
+            {
+                "_id": "6974e55a276808eac7358b69",
+                "fullName": "Muhammad Waleed",
+                "email": "waleed@gmail.com",
+                "role": {
+                            "_id": "6974e0ea55708f7526eb8b8d",
+                            "name": "Admin",
+                            "code": "ADMIN"
+                        },
+                "phone": "03111222333",
+                "isActive": true,
+                "createdAt": "2026-01-24T15:29:30.664Z",
+                "updatedAt": "2026-01-24T15:29:30.664Z",                "__v": 0
+                "__v": 0
+            }  
+        ]
+
+PUT /api/user/:id
+    ===structure===
+        {
+           "fullName":"Muhammad Waleed Farhan" //Or any field has to update wirte here
+        }
+
+    ===Reponse===
+       {
+            "message": "User updated successfully",
+            "user": {
+                        "_id": "6974e55a276808eac7358b69",
+                        "fullName": "Muhammad Waleed Farhan",
+                        "email": "waleed@gmail.com",
+                        "role": "6974e0ea55708f7526eb8b8d",
+                        "phone": "03111222333",
+                        "isActive": true,
+                        "createdAt": "2026-01-24T15:29:30.664Z",
+                        "updatedAt": "2026-01-24T15:57:00.866Z",
+                        "__v": 0
+                    }
+        }
+
+PATCH /api/user/:id/status
+    ===structure===
+        {
+
+        }
+
+    ===Reponse===
+       {
+          "message": "User deactivated"
+       }
+
+
+====================================
+            Permissions ✅
+====================================
+POST /api/permissions/
+    ===structure===
+        {
+           "name": "User FIND Access",
+            "key": "USER_FIND",
+            "module": "User",
+            "description": "User Find Permissions"
+        }
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Permission created successfully",
+            "data": {
+                        "name": "User FIND Access",
+                        "key": "USER_FIND",
+                        "module": "User",
+                        "description": "User Find Permissions",
+                        "isActive": true,
+                        "_id": "6974edd0aadeef38cc8c0627",
+                        "createdAt": "2026-01-24T16:05:36.992Z",
+                        "updatedAt": "2026-01-24T16:05:36.992Z",
+                        "__v": 0
+                    }
+        }
+    
+GET /api/permissions/
+    ===structure===
+        {
+         
+        }
+
+    ===Reponse===
+        {
+            {
+                "success": true,
+                "count": 13,
+                "data": [
+                           {
+                                "_id": "6974d89544b21247fdd97eab",
+                                "name": "Visitor Log Access",
+                                "key": "VISITOR_LOG",
+                                "module": "Security",
+                                "description": "View and manage visitor logs",
+                                "isActive": true,
+                                "createdAt": "2026-01-24T14:35:01.167Z",
+                                "updatedAt": "2026-01-24T14:35:01.167Z",
+                                "__v": 0
+                            },
+                        ]          
+
+            }
+        }
+
+
+PUT /api/permissions/:id
+    ===structure===
+        {
+           "description": "User Find Access" //Anything to be upadte through this route
+        }
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Permission updated successfully",
+            "data": {
+                        "_id": "6974d89544b21247fdd97eab",
+                        "name": "Visitor Log Access",
+                        "key": "VISITOR_LOG",
+                        "module": "Security",
+                        "description": "User Find Access",
+                        "isActive": true,
+                        "createdAt": "2026-01-24T14:35:01.167Z",
+                        "updatedAt": "2026-01-25T08:05:54.741Z",
+                        "__v": 0
+                    }
+        }
+
+
+PATCH /api/permissions/:id/status
+    ===structure===
+        {
+
+        }
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Permission disabled successfully",
+            "data": {
+                        "_id": "6974d89544b21247fdd97eab",
+                        "name": "Visitor Log Access",
+                        "key": "VISITOR_LOG",
+                        "module": "Security",
+                        "description": "User Find Access",
+                        "isActive": false,
+                        "createdAt": "2026-01-24T14:35:01.167Z",
+                        "updatedAt": "2026-01-25T08:10:22.747Z",
+                        "__v": 0
+                    }
+        }
+
+
+
+DELTE /api/permissions/:id/
+    ===structure===
+        {
+
+        }
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Permission deleted successfully"
+        }
+
+
+====================================
+            Role ✅
+====================================
+
+POST /api/roles/
+    ===structure===
+        {
+            "name": "Manager",
+            "code": "MANAGER",
+            "permissions": [
+                                "6974dd2244b21247fdd97ec9",
+                                "6974dd0544b21247fdd97ec6",
+                                "6974dcf144b21247fdd97ec3"
+                            ],      
+            "isSystemRole": true
+        }
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Role created successfully",
+            "data": {
+                        "name": "Manager",
+                        "code": "MANAGER",
+                        "permissions": [
+                                            "6974dcf144b21247fdd97ec3",
+                                            "6974dd0544b21247fdd97ec6",
+                                            "6974dd2244b21247fdd97ec9"
+                                        ],
+                        "isSystemRole": false,
+                        "isActive": true,
+                        "_id": "6975d4dafd3d7544443145db",
+                        "createdAt": "2026-01-25T08:31:22.128Z",
+                        "updatedAt": "2026-01-25T08:31:22.128Z",
+                        "__v": 0
+                    }
+        }
+
+
+GET /api/roles/
+    ===structure===
+        {
+            
+        }
+    ===Reponse===
+        {
+            "success": true,
+            "count": 2,
+            "data": [
+                        {
+                            "_id": "6974e0ea55708f7526eb8b8d",
+                            "name": "Admin",
+                            "code": "ADMIN",
+                            "permissions": [
+                                                {
+                                                    "_id": "6974d63444b21247fdd97ea8",
+                                                    "name": "Create User",
+                                                    "key": "USER_CREATE",
+                                                    "module": "User"
+                                                },
+                                                {
+                                                    "_id": "6974d8d544b21247fdd97eae",
+                                                    "name": "Permission Create Access",
+                                                    "key": "PERMISSION_CREATE",
+                                                    "module": "User"
+                                                },
+                                                {
+                                                    "_id": "6974d94844b21247fdd97eb1",
+                                                    "name": "Permission View Access",
+                                                    "key": "PERMISSION_VIEW",
+                                                    "module": "User"
+                                                },
+                                                {
+                                                    "_id": "6974da2b44b21247fdd97eb4",
+                                                    "name": "Permission Update Access",
+                                                    "key": "PERMISSION_UPDATE",
+                                                    "module": "User"
+                                                },
+                                                {
+                                                    "_id": "6974da4844b21247fdd97eb7",
+                                                    "name": "Permission Delete Access",
+                                                    "key": "PERMISSION_DELETE",
+                                                    "module": "User"
+                                                },
+                                                {
+                                                    "_id": "6974dbe644b21247fdd97eba",
+                                                    "name": "Role Create Access",
+                                                    "key": "ROLE_CREATE",
+                                                    "module": "User"
+                                                },
+                                                {
+                                                    "_id": "6974dc0144b21247fdd97ebd",
+                                                    "name": "Role View Access",
+                                                    "key": "ROLE_VIEW",   
+                                                    "module": "User"
+                                                },
+                                                {
+                                                    "_id": "6974dc6244b21247fdd97ec0",
+                                                    "name": "Role Update Access",
+                                                    "key": "ROLE_UPDATE",
+                                                    "module": "User"
+                                                },
+                                                {
+                                                    "_id": "6974dcf144b21247fdd97ec3",
+                                                    "name": "User View Access",
+                                                    "key": "USER_VIEW",
+                                                    "module": "User"
+                                                },
+                                                {
+                                                    "_id": "6974dd0544b21247fdd97ec6",
+                                                    "name": "User Update Access",
+                                                    "key": "USER_UPDATE",
+                                                    "module": "User"
+                                                },
+                                                {
+                                                    "_id": "6974dd2244b21247fdd97ec9",
+                                                    "name": "User Status Access",
+                                                    "key": "USER_STATUS",
+                                                    "module": "User"
+                                                }
+                                            ],
+                            "isSystemRole": false,
+                            "isActive": true,
+                            "createdAt": "2026-01-24T15:10:34.151Z",
+                            "updatedAt": "2026-01-24T15:10:34.151Z",
+                            "__v": 0
+                        },
+                    ]
+        }        
+
+
+GET /api/roles/:id
+    ===structure===
+        {
+            
+        }
+    ===Reponse===
+        {
+            "success": true,
+            "data": {
+                        "_id": "6975d4dafd3d7544443145db",
+                        "name": "Manager",
+                        "code": "MANAGER",
+                        "permissions": [
+                                            {
+                                                "_id": "6974dcf144b21247fdd97ec3",
+                                                "name": "User View Access",
+                                                "key": "USER_VIEW",
+                                                "module": "User"
+                                            },
+                                            {
+                                                "_id": "6974dd0544b21247fdd97ec6",
+                                                "name": "User Update Access",
+                                                "key": "USER_UPDATE",
+                                                "module": "User"
+                                            },
+                                            {
+                                                "_id": "6974dd2244b21247fdd97ec9",
+                                                "name": "User Status Access",
+                                                "key": "USER_STATUS",
+                                                "module": "User"
+                                            }
+                                        ],  
+                        "isSystemRole": false,
+                        "isActive": true,
+                        "createdAt": "2026-01-25T08:31:22.128Z",
+                        "updatedAt": "2026-01-25T08:31:22.128Z",
+                        "__v": 0
+                    }
+        }
+
+    
+
+PUT /api/roles/:id
+    ===structure===
+        {
+            "permissions": [
+                                "6974dcf144b21247fdd97ec3",
+                                "6974dd0544b21247fdd97ec6",
+                                "6974dd2244b21247fdd97ec9"
+                            ]
+        }
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Role updated successfully",
+            "data": {
+                        "_id": "6975d4dafd3d7544443145db",
+                        "name": "Manager",
+                        "code": "MANAGER",
+                        "permissions": [
+                                            {
+                                                "_id": "6974dcf144b21247fdd97ec3",  
+                                                "name": "User View Access",
+                                                "key": "USER_VIEW",
+                                                "module": "User"
+                                            },
+                                            {
+                                                "_id": "6974dd0544b21247fdd97ec6",
+                                                "name": "User Update Access",
+                                                "key": "USER_UPDATE",
+                                                "module": "User"
+                                            },
+                                            {
+                                                "_id": "6974dd2244b21247fdd97ec9",
+                                                "name": "User Status Access",
+                                                "key": "USER_STATUS",
+                                                "module": "User"
+                                            }
+                                        ],
+                        "isSystemRole": false,
+                        "isActive": true,
+                        "createdAt": "2026-01-25T08:31:22.128Z",
+                        "updatedAt": "2026-01-25T08:50:47.160Z",
+                        "__v": 0
+                    }
+        }
+
+
+PATCH /api/roles/:id/status
+    ===structure===
+        {
+           
+        }
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Role updated successfully",
+            "data": {
+                        "_id": "6975d4dafd3d7544443145db",
+                        "name": "Manager",
+                        "code": "MANAGER",
+                        "permissions": [
+                                            {
+                                                "_id": "6974dcf144b21247fdd97ec3",  
+                                                "name": "User View Access",
+                                                "key": "USER_VIEW",
+                                                "module": "User"
+                                            },
+                                            {
+                                                "_id": "6974dd0544b21247fdd97ec6",
+                                                "name": "User Update Access",
+                                                "key": "USER_UPDATE",
+                                                "module": "User"
+                                            },
+                                            {
+                                                "_id": "6974dd2244b21247fdd97ec9",
+                                                "name": "User Status Access",
+                                                "key": "USER_STATUS",
+                                                "module": "User"
+                                            }
+                                        ],
+                        "isSystemRole": false,
+                        "isActive": true,
+                        "createdAt": "2026-01-25T08:31:22.128Z",
+                        "updatedAt": "2026-01-25T08:50:47.160Z",
+                        "__v": 0
+                    }
+        }
