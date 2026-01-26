@@ -743,3 +743,355 @@ DELETE /api/rooms/:id
          "success": true,
          "message": "Room deactivated successfully"
        }
+
+
+
+====================================
+            Bed ✅
+====================================
+
+POST /api/beds/
+    ===structure===
+        {
+            "bedNumber": "B3",
+            "room_Id": "697758d4b4b36cce90736352",
+            "status": "OCCUPIED"
+        }
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Bed created successfully",
+            "data": {
+                        "bedNumber": "B3",
+                        "room_Id": "697758d4b4b36cce90736352",
+                        "status": "AVAILABLE",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "_id": "6977cd0dcf0a41719a64a449",
+                        "createdAt": "2026-01-26T20:22:37.702Z",
+                        "updatedAt": "2026-01-26T20:22:37.702Z",
+                        "__v": 0
+                    }
+        }
+
+
+
+GET /api/beds/
+    ===structure===
+        {
+            
+        }
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "count": 9,
+            "data": [
+                       {
+                        "_id": "6977cc9fcf0a41719a64a419",
+                        "bedNumber": "B1",
+                        "room_Id": {
+                                        "_id": "6977569b59ae50a271efdcff",
+                                        "roomNumber": "A-001"
+                                    },
+                        "status": "AVAILABLE",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:20:47.718Z",
+                        "updatedAt": "2026-01-26T20:20:47.718Z",
+                        "__v": 0
+                      },
+                      {
+                        "_id": "6977ccbbcf0a41719a64a41f",
+                        "bedNumber": "B1",
+                        "room_Id": {
+                                        "_id": "69775776b4b36cce90736342",
+                                        "roomNumber": "A-002"
+                                    },
+                        "status": "AVAILABLE",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:21:15.794Z",
+                        "updatedAt": "2026-01-26T20:21:15.794Z",
+                        "__v": 0
+                      },
+                      {
+                        "_id": "6977ccd8cf0a41719a64a42b",
+                        "bedNumber": "B1",
+                        "room_Id": {
+                                        "_id": "69775793b4b36cce90736348",
+                                        "roomNumber": "A-003"
+                                    },
+                        "status": "AVAILABLE",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:21:44.456Z",
+                        "updatedAt": "2026-01-26T20:21:44.456Z",
+                        "__v": 0
+                      },
+                      {
+                        "_id": "6977cd03cf0a41719a64a43d",
+                        "bedNumber": "B1",
+                        "room_Id": {
+                                        "_id": "697758d4b4b36cce90736352",
+                                        "roomNumber": "A-004"
+                                    },
+                        "status": "AVAILABLE",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:22:27.851Z",
+                        "updatedAt": "2026-01-26T20:22:27.851Z",
+                        "__v": 0
+                      },
+                      {
+                        "_id": "6977ccc4cf0a41719a64a425",
+                        "bedNumber": "B2",
+                        "room_Id": {
+                                        "_id": "69775776b4b36cce90736342",
+                                        "roomNumber": "A-002"
+                                    },
+                        "status": "AVAILABLE",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:21:24.841Z",
+                        "updatedAt": "2026-01-26T20:21:24.841Z",
+                        "__v": 0
+                      },
+                      {
+                        "_id": "6977cce1cf0a41719a64a431",
+                        "bedNumber": "B2",
+                        "room_Id": {
+                                        "_id": "69775793b4b36cce90736348",
+                                        "roomNumber": "A-003"   
+                                    },
+                        "status": "AVAILABLE",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:21:53.677Z",
+                        "updatedAt": "2026-01-26T20:21:53.677Z",
+                        "__v": 0
+                      },
+                      {
+                        "_id": "6977cd08cf0a41719a64a443",
+                        "bedNumber": "B2",
+                        "room_Id": {
+                                        "_id": "697758d4b4b36cce90736352",
+                                        "roomNumber": "A-004"
+                                    },
+                        "status": "AVAILABLE",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:22:32.784Z",
+                        "updatedAt": "2026-01-26T20:22:32.784Z",
+                        "__v": 0
+                      },
+                      {
+                        "_id": "6977ccf1cf0a41719a64a437",
+                        "bedNumber": "B3",
+                        "room_Id": {
+                                        "_id": "69775793b4b36cce90736348",
+                                        "roomNumber": "A-003"
+                                    },
+                        "status": "AVAILABLE",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:22:09.850Z",
+                        "updatedAt": "2026-01-26T20:22:09.850Z",
+                        "__v": 0
+                      },
+                      {
+                        "_id": "6977cd0dcf0a41719a64a449",
+                        "bedNumber": "B3",
+                        "room_Id": {
+                                        "_id": "697758d4b4b36cce90736352",
+                                        "roomNumber": "A-004"
+                                    },
+                        "status": "AVAILABLE",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:22:37.702Z",
+                        "updatedAt": "2026-01-26T20:22:37.702Z",
+                        "__v": 0
+                      }
+                ]
+        }
+
+
+
+GET /api/beds/:id
+    ===structure===
+        {
+            
+        }
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "data": {
+                        "_id": "6977cc9fcf0a41719a64a419",
+                        "bedNumber": "B1",
+                        "room_Id": {
+                                        "_id": "6977569b59ae50a271efdcff",
+                                        "roomNumber": "A-001"
+                                    },
+                        "status": "AVAILABLE",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:20:47.718Z",
+                        "updatedAt": "2026-01-26T20:20:47.718Z",
+                        "__v": 0
+                    }
+        }
+
+
+
+PUT /api/beds/:id
+    ===structure===
+        {
+            "status": "OCCUPIED" 
+        }
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Bed updated successfully",
+            "data": {
+                        "_id": "6977cc9fcf0a41719a64a419",
+                        "bedNumber": "B1",
+                        "room_Id": "6977569b59ae50a271efdcff",
+                        "status": "OCCUPIED",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:20:47.718Z",
+                        "updatedAt": "2026-01-26T20:35:19.991Z",
+                        "__v": 0
+                    }
+        }
+
+
+DELETE /api/beds/:id
+    ===structure===
+        {
+
+        }
+
+
+    ===Reponse===
+        { 
+            "success": true,
+            "message": "Bed deactivated successfully"
+        }
+
+    
+PATCH /api/beds/:id/active
+    ===structure===
+        {
+
+        }
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Bed activated successfully",
+            "data": {
+                        "_id": "6977cd0dcf0a41719a64a449",
+                        "bedNumber": "B3",
+                        "room_Id": "697758d4b4b36cce90736352",
+                        "status": "AVAILABLE",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:22:37.702Z",
+                        "updatedAt": "2026-01-26T20:44:21.286Z",
+                        "__v": 0
+                    }
+        }
+
+
+PATCH /api/beds/:id/status
+    ===structure===
+        {
+            "status": "OCCUPIED"
+        }
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Bed status changed successfully",
+            "data": {
+                        "_id": "6977cd03cf0a41719a64a43d",
+                        "bedNumber": "B1",
+                        "room_Id": "697758d4b4b36cce90736352",
+                        "status": "OCCUPIED",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T20:22:27.851Z",
+                        "updatedAt": "2026-01-26T20:47:16.688Z",
+                        "__v": 0
+                    }
+        }
+
+
+
+GET /api/beds/room/:roomId
+    ===structure===
+        {
+            
+        }
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "count": 3,
+            "data": [
+                        {
+                            "_id": "6977ccd8cf0a41719a64a42b",
+                            "bedNumber": "B1",
+                            "room_Id": {
+                                            "_id": "69775793b4b36cce90736348",
+                                            "roomNumber": "A-003"
+                                        },
+                            "status": "AVAILABLE",
+                            "createdBy": "6974e55a276808eac7358b69",
+                            "isActive": true,
+                            "createdAt": "2026-01-26T20:21:44.456Z",
+                            "updatedAt": "2026-01-26T20:21:44.456Z",
+                            "__v": 0
+                        },
+                        {      
+                            "_id": "6977cce1cf0a41719a64a431",
+                            "bedNumber": "B2",
+                            "room_Id": {
+                                            "_id": "69775793b4b36cce90736348",
+                                            "roomNumber": "A-003"
+                                        },
+                            "status": "AVAILABLE",
+                            "createdBy": "6974e55a276808eac7358b69",
+                            "isActive": true,
+                            "createdAt": "2026-01-26T20:21:53.677Z",
+                            "updatedAt": "2026-01-26T20:21:53.677Z",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "6977ccf1cf0a41719a64a437",
+                            "bedNumber": "B3",
+                            "room_Id": {
+                                            "_id": "69775793b4b36cce90736348",
+                                            "roomNumber": "A-003"
+                                        },
+                            "status": "AVAILABLE",
+                            "createdBy": "6974e55a276808eac7358b69",
+                            "isActive": true,
+                            "createdAt": "2026-01-26T20:22:09.850Z",
+                            "updatedAt": "2026-01-26T20:22:09.850Z",
+                            "__v": 0
+                        }
+                    ]
+        }

@@ -35,7 +35,7 @@ app.use("/api/roles", require("./routes/role.routes"));
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/users", require("./routes/user.routes"));
 app.use("/api/rooms/",require("./routes/room.routes"));
-//app.use("/api/beds/",require("./routes/bed.routes"));
+app.use("/api/beds/",require("./routes/bed.routes"));
 //app.use("/api/members/",require("./routes/member.routes"));
 // Health check route (optional but smart)
 app.get("/", (req, res) => {
