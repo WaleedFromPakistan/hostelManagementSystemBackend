@@ -525,3 +525,221 @@ PATCH /api/roles/:id/status
                         "__v": 0
                     }
         }
+
+
+
+====================================
+            Room ✅
+====================================
+
+POST /api/rooms/
+    ===structure===
+        {
+            "roomNumber": "A-003",
+            "floor": 1,
+            "totalBeds": 3,
+            "roomType": "TRIPLE",
+            "rentPerBed": 15000,
+            "status": "AVAILABLE",
+            "hasAC": true,
+            "hasWashroom": true,
+            "createdBy": "6974e55a276808eac7358b69"
+        }
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Room created successfully",
+            "data": {
+                        "roomNumber": "A-004",
+                        "floor": 1,
+                        "totalBeds": 3,
+                        "roomType": "TRIPLE",
+                        "rentPerBed": 15000,
+                        "status": "AVAILABLE",
+                        "hasAC": true,
+                        "hasWashroom": true,
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "_id": "697758d4b4b36cce90736352",
+                        "createdAt": "2026-01-26T12:06:44.694Z",
+                        "updatedAt": "2026-01-26T12:06:44.694Z",
+                        "__v": 0
+                    }
+        }
+
+
+
+GET /api/rooms/
+    ===structure===
+        {
+            
+        }
+
+    ===Reponse===
+        {
+            "success": true,
+            "count": 4,
+            "data": [
+                        {
+                            "_id": "6977569b59ae50a271efdcff",
+                            "roomNumber": "A-001",
+                            "floor": 1,
+                            "totalBeds": 1,
+                            "roomType": "SINGLE",
+                            "rentPerBed": 15000,
+                            "status": "AVAILABLE",
+                            "hasAC": true,
+                            "hasWashroom": true,
+                            "createdBy": "6974e55a276808eac7358b69",
+                            "isActive": true,
+                            "createdAt": "2026-01-26T11:57:15.995Z",
+                            "updatedAt": "2026-01-26T11:57:15.995Z",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "69775776b4b36cce90736342",
+                            "roomNumber": "A-002",
+                            "floor": 1,
+                            "totalBeds": 2,   
+                            "roomType": "DOUBLE",
+                            "rentPerBed": 15000,
+                            "status": "AVAILABLE",
+                            "hasAC": true,
+                            "hasWashroom": true,
+                            "createdBy": "6974e55a276808eac7358b69",
+                            "isActive": true,
+                            "createdAt": "2026-01-26T12:00:54.489Z",
+                            "updatedAt": "2026-01-26T12:00:54.489Z",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "69775793b4b36cce90736348",
+                            "roomNumber": "A-003",
+                            "floor": 1,
+                            "totalBeds": 3,
+                            "roomType": "TRIPLE",
+                            "rentPerBed": 15000,
+                            "status": "AVAILABLE",
+                            "hasAC": true,
+                            "hasWashroom": true,
+                            "createdBy": "6974e55a276808eac7358b69",
+                            "isActive": true,
+                            "createdAt": "2026-01-26T12:01:23.162Z",
+                            "updatedAt": "2026-01-26T12:01:23.162Z",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "697758d4b4b36cce90736352",
+                            "roomNumber": "A-004",
+                            "floor": 1,
+                            "totalBeds": 3,
+                            "roomType": "TRIPLE",
+                            "rentPerBed": 15000,
+                            "status": "AVAILABLE",
+                            "hasAC": true,
+                            "hasWashroom": true,
+                            "createdBy": "6974e55a276808eac7358b69",
+                            "isActive": true,
+                            "createdAt": "2026-01-26T12:06:44.694Z",
+                            "updatedAt": "2026-01-26T12:06:44.694Z",
+                            "__v": 0
+                        }
+                    ]
+        }
+
+
+GET /api/rooms/:id
+    ===structure===
+        {
+          
+        }
+
+    ===Reponse===
+        {
+            "success": true,
+            "data": {
+                        "_id": "6977569b59ae50a271efdcff",
+                        "roomNumber": "A-001",
+                        "floor": 1,
+                        "totalBeds": 1,
+                        "roomType": "SINGLE",
+                        "rentPerBed": 15000,
+                        "status": "AVAILABLE",
+                        "hasAC": true,
+                        "hasWashroom": true,
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T11:57:15.995Z",
+                        "updatedAt": "2026-01-26T11:57:15.995Z",
+                        "__v": 0
+                    }
+        }
+
+
+PATCH /api/rooms/
+    ===structure===
+        {
+            "status":"AVAILABLE"
+        }
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Room status updated",
+            "data": {
+                        "_id": "6977569b59ae50a271efdcff",
+                        "roomNumber": "A-001",
+                        "floor": 1,
+                        "totalBeds": 1,
+                        "roomType": "SINGLE",
+                        "rentPerBed": 15000,
+                        "status": "AVAILABLE",
+                        "hasAC": true,
+                        "hasWashroom": true,
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T11:57:15.995Z",
+                        "updatedAt": "2026-01-26T12:44:01.533Z",
+                        "__v": 0
+                    }
+        }
+
+
+PUT /api/rooms/
+    ===structure===
+        {
+            "status":"FULL" // Any field can be updated by this route accordingly
+        }
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Room status updated",
+            "data": {
+                        "_id": "6977569b59ae50a271efdcff",
+                        "roomNumber": "A-001",
+                        "floor": 1,
+                        "totalBeds": 1,
+                        "roomType": "FULL",
+                        "rentPerBed": 15000,
+                        "status": "AVAILABLE",
+                        "hasAC": true,
+                        "hasWashroom": true,
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "isActive": true,
+                        "createdAt": "2026-01-26T11:57:15.995Z",
+                        "updatedAt": "2026-01-26T12:44:01.533Z",
+                        "__v": 0
+                    }
+        }
+
+
+DELETE /api/rooms/:id
+    ===structure===
+        {
+
+        }
+    ===Reponse===
+       {
+         "success": true,
+         "message": "Room deactivated successfully"
+       }

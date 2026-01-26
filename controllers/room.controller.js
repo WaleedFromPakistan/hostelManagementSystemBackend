@@ -17,7 +17,7 @@ exports.createRoom = async (req, res) => {
       hasAC,
       hasWashroom
     } = req.body;
-
+    
     // Prevent duplicate room number
     const existingRoom = await Room.findOne({ roomNumber });
     if (existingRoom) {
@@ -35,7 +35,7 @@ exports.createRoom = async (req, res) => {
       rentPerBed,
       hasAC,
       hasWashroom,
-      createdBy: req.user._id
+      createdBy: req.user.id
     });
 
     res.status(201).json({
@@ -164,8 +164,10 @@ exports.updateRoomStatus = async (req, res) => {
         message: "Room not found"
       });
     }
-
+    console.log("status:", status);
+    console.log("room status before:", room.status);
     room.status = status;
+    console.log("room status after:", room.status);
     await room.save();
 
     res.status(200).json({

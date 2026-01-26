@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const roomController = require("../controllers/room.controller");
-const { protect } = require("../middlewares/auth.middleware");
-const { hasPermission } = require("../middlewares/permission.middleware");
+const { protect } = require("../middleware/auth.middleware");
+const { hasPermission } = require("../middleware/permission.middleware");
 
 /*
 |--------------------------------------------------------------------------
