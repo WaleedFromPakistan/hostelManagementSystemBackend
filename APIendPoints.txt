@@ -1095,3 +1095,191 @@ GET /api/beds/room/:roomId
                         }
                     ]
         }
+
+
+
+
+
+====================================
+            Member ✅
+====================================
+POST /api/members
+    ===structure===
+        {
+            "memberCode": "M-003",
+            "fullName": "Hassan Ali",
+            "cnic": "35202-9988776-3",
+            "phone": "03214567890",
+            "guardianName": "Ali Akbar",
+            "guardianPhone": "03219876543",
+            "instituteName": "LCWU Lahore",
+            "status": "ON_LEAVE",
+            "joinDate": "2024-11-15",
+            "address": "Model Town, Lahore"
+        }
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Member created successfully",
+            "data": {
+                        "memberCode": "M-003",
+                        "fullName": "Hassan Ali",
+                        "cnic": "35202-9988776-3",
+                        "phone": "03214567890",
+                        "guardianName": "Ali Akbar",
+                        "guardianPhone": "03219876543",
+                        "instituteName": "LCWU Lahore",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "status": "ACTIVE",
+                        "joinDate": "2024-11-15T00:00:00.000Z",
+                        "leaveDate": null,
+                        "address": "Model Town, Lahore",
+                        "isActive": true,
+                        "_id": "697a2abeabf32a0143589fde",
+                        "createdAt": "2026-01-28T15:26:54.565Z",
+                        "updatedAt": "2026-01-28T15:26:54.565Z",
+                        "__v": 0
+                    }
+        }
+
+
+GET /api/members/               Or      GET /api/members?status=ACTIVE
+    ===structure===
+        {
+     
+        }
+
+    ===Reponse===
+        {
+            "success": true,
+            "count": 2,
+            "data": [
+                        {
+                            "_id": "697a2abeabf32a0143589fde",
+                            "memberCode": "M-003",
+                            "fullName": "Hassan Ali",
+                            "cnic": "35202-9988776-3",
+                            "phone": "03214567890",
+                            "guardianName": "Ali Akbar",
+                            "guardianPhone": "03219876543",
+                            "instituteName": "LCWU Lahore",
+                            "createdBy": "6974e55a276808eac7358b69",
+                            "status": "ACTIVE",
+                            "joinDate": "2024-11-15T00:00:00.000Z",
+                            "leaveDate": null,
+                            "address": "Model Town, Lahore",
+                            "isActive": true,
+                            "createdAt": "2026-01-28T15:26:54.565Z",
+                            "updatedAt": "2026-01-28T15:26:54.565Z",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "697a2a79abf32a0143589fd8",
+                            "memberCode": "M-001",
+                            "fullName": "Ali Raza",
+                            "cnic": "35202-1234567-1",
+                            "phone": "03011223344",
+                            "guardianName": "Ahmed Raza",
+                            "guardianPhone": "03099887766",
+                            "instituteName": "University of Lahore",
+                            "createdBy": "6974e55a276808eac7358b69",
+                            "status": "ACTIVE",
+                            "joinDate": "2025-01-10T00:00:00.000Z",
+                            "leaveDate": null,
+                            "address": "Johar Town, Lahore",
+                            "isActive": true,
+                            "createdAt": "2026-01-28T15:25:45.585Z",
+                            "updatedAt": "2026-01-28T15:25:45.585Z",
+                            "__v": 0
+                        }
+                    ]
+        }
+
+
+
+GET /api/members/:id               
+    ===structure===
+        {
+     
+        }
+
+    ===Reponse===
+        {
+            "_id": "697a2abeabf32a0143589fde",
+            "memberCode": "M-003",
+            "fullName": "Hassan Ali",
+            "cnic": "35202-9988776-3",
+            "phone": "03214567890",
+            "guardianName": "Ali Akbar",
+            "guardianPhone": "03219876543",
+            "instituteName": "LCWU Lahore",
+            "createdBy": "6974e55a276808eac7358b69",
+            "status": "ACTIVE",
+            "joinDate": "2024-11-15T00:00:00.000Z",
+            "leaveDate": null,
+            "address": "Model Town, Lahore",
+            "isActive": true,
+            "createdAt": "2026-01-28T15:26:54.565Z",
+            "updatedAt": "2026-01-28T15:26:54.565Z",
+            "__v": 0
+        }
+
+
+
+PUT /api/members/:id               
+    ===structure===
+        {
+            "phone": "03091845657" 
+        }
+
+    ===Reponse===
+        {
+            "success": true,
+            "message":"Member updated successfully",
+            "data": {
+                        "_id": "697a2abeabf32a0143589fde",
+                        "memberCode": "M-003",
+                        "fullName": "Hassan Ali",
+                        "cnic": "35202-9988776-3",
+                        "phone": "03091845657",
+                        "guardianName": "Ali Akbar",
+                        "guardianPhone": "03219876543",
+                        "instituteName": "LCWU Lahore",
+                        "createdBy": "6974e55a276808eac7358b69",
+                        "status": "ACTIVE",
+                        "joinDate": "2024-11-15T00:00:00.000Z",
+                        "leaveDate": null,
+                        "address": "Model Town, Lahore",
+                        "isActive": true,
+                        "createdAt": "2026-01-28T15:26:54.565Z",
+                        "updatedAt": "2026-01-28T15:26:54.565Z",
+                        "__v": 0
+                    }
+        }
+
+
+
+PATCH /api/members/:id/status               
+    ===structure===
+        {
+            "status": "ON_LEAVE"
+        }
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Member status updated"
+        }
+
+DELETE /api/members/:id               
+    ===structure===
+        {
+        
+        }
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Member deactivated successfully"
+        }

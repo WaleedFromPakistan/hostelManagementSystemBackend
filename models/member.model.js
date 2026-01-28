@@ -2,32 +2,14 @@ const mongoose = require("mongoose");
 
 const memberSchema = new mongoose.Schema(
   {
-    /*
-    |--------------------------------------------------------------------------
-    | BASIC INFO
-    |--------------------------------------------------------------------------
-    */
-
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-      unique: true
-    },
-
-    registrationNumber: {
+    memberCode: {
       type: String,
       required: true,
       unique: true,
       trim: true
     },
 
-    fatherName: {
-      type: String,
-      trim: true
-    },
-
-    phone: {
+    fullName: {
       type: String,
       required: true,
       trim: true
@@ -40,101 +22,58 @@ const memberSchema = new mongoose.Schema(
       trim: true
     },
 
-    address: {
+    phone: {
       type: String,
+      required: true,
       trim: true
     },
 
-    emergencyContact: {
-      name: String,
-      phone: String,
-      relation: String
-    },
-
-    /*
-    |--------------------------------------------------------------------------
-    | HOSTEL STATUS
-    |--------------------------------------------------------------------------
-    */
-
-    status: {
+    guardianName: {
       type: String,
-      enum: ["ACTIVE", "LEFT", "SUSPENDED"],
-      default: "ACTIVE"
+      required: true,
+      trim: true
     },
 
-    joiningDate: {
-      type: Date,
-      default: Date.now
+    guardianPhone: {
+      type: String,
+      required: true,
+      trim: true
     },
 
-    leavingDate: {
-      type: Date
+    instituteName: {
+      type: String,
+      required: true,
+      trim: true
     },
 
-    /*
-    |--------------------------------------------------------------------------
-    | ROOM & BED (current assignment only)
-    |--------------------------------------------------------------------------
-    */
-
-    currentRoom: {
+    
+    
+    createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Room"
-    },
-
-    currentBed: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Bed"
-    },
-
-    /*
-    |--------------------------------------------------------------------------
-    | BILLING SUMMARY (cached for performance)
-    |--------------------------------------------------------------------------
-    */
-
-    monthlyRent: {
-      type: Number,
+      ref: "User",
       required: true
     },
 
-    securityDeposit: {
-      type: Number,
-      default: 0
-    },
-
-    totalDue: {
-      type: Number,
-      default: 0
-    },
-
-    /*
-    |--------------------------------------------------------------------------
-    | MESS SETTINGS
-    |--------------------------------------------------------------------------
-    */
-
-    messEnabled: {
-      type: Boolean,
-      default: true
-    },
-
-    dietPreference: {
+    status: {
       type: String,
-      enum: ["NORMAL", "VEG", "DIABETIC"],
-      default: "NORMAL"
+      enum: ["ACTIVE", "ON_LEAVE", "LEFT"],
+      default: "ACTIVE"
     },
 
-    /*
-    |--------------------------------------------------------------------------
-    | META
-    |--------------------------------------------------------------------------
-    */
+    joinDate: {
+      type: Date,
+      required: true,
+      default: Date.now
+    },
 
-    createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+    leaveDate: {
+      type: Date,
+      default: null
+    },
+
+    address: {
+      type: String,
+      trim: true
     },
 
     isActive: {
@@ -146,5 +85,11 @@ const memberSchema = new mongoose.Schema(
     timestamps: true
   }
 );
+
+// Indexes for performance
+memberSchema.index({ memberCode: 1 });
+memberSchema.index({ cnic: 1 });
+memberSchema.index({ currentRoomId: 1 });
+memberSchema.index({ currentBedId: 1 });
 
 module.exports = mongoose.model("Member", memberSchema);
