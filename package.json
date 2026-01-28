@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "npm install"
   },
   "keywords": ["hostel", "management", "backend", "express", "nodejs", "mongoose"],
   "author": "Muhammad Waleed B.",
