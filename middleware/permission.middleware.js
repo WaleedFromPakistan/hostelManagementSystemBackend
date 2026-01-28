@@ -12,4 +12,6 @@ exports.hasPermission = (requiredPermission) => {
 
     next();
   };
+
+  
 };
