@@ -62,7 +62,7 @@ exports.getAllBeds = async (req, res) => {
     if (status) filter.status = status;
 
     const beds = await Bed.find(filter)
-      .populate("room_Id", "roomNumber")
+      .populate("room_Id", "roomNumber floor")
       .sort({ bedNumber: 1 });
 
     res.status(200).json({
