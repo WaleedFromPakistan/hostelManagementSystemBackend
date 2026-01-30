@@ -37,6 +37,7 @@ app.use("/api/users", require("./routes/user.routes"));
 app.use("/api/rooms/",require("./routes/room.routes"));
 app.use("/api/beds/",require("./routes/bed.routes"));
 app.use("/api/members/",require("./routes/member.routes"));
+app.use("/api/bed-assignments/",require("./routes/bedAssignment.routes"));
 // Health check route (optional but smart)
 app.get("/", (req, res) => {
   res.json({ status: "API running" });

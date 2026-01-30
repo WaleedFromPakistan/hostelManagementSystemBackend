@@ -1283,3 +1283,185 @@ DELETE /api/members/:id
             "success": true,
             "message": "Member deactivated successfully"
         }
+
+
+
+
+
+
+
+====================================
+            Bed Assignments ✅
+====================================
+POST /api/bed-assignments/
+    ===structure===
+        {
+          "member_Id": "697a2a79abf32a0143589fd8",
+          "bed_Id": "6977ccc4cf0a41719a64a425",
+          "startDate": "2026-01-15T10:00:00.000Z",
+          "remarks": "Assigned on admission"
+        }
+
+
+    ===Reponse===
+       {
+            "success": true,
+            "message": "Bed assigned successfully",
+            "data": {
+                        "member_Id": "697a2a79abf32a0143589fd8",
+                        "bed_Id": "6977ccc4cf0a41719a64a425",
+                        "room_Id": "69775776b4b36cce90736342",
+                        "endDate": null,
+                        "status": "ACTIVE",
+                        "billable": true,
+                        "rentAtAssignment": 15000,
+                        "assignedBy": "6974e55a276808eac7358b69",
+                        "remarks": "Assigned on admission",
+                        "_id": "697cda9a3cfec9e27de36ae4",
+                        "startDate": "2026-01-30T16:21:46.873Z",
+                        "createdAt": "2026-01-30T16:21:46.889Z",
+                        "updatedAt": "2026-01-30T16:21:46.889Z",
+                        "__v": 0
+                    }
+        }
+
+
+
+
+GET /api/bed-assignments/
+    ===structure===
+        {
+          
+        }
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "count": 1,
+            "data": [
+                        {
+                            "_id": "697cda9a3cfec9e27de36ae4",
+                            "member_Id": {
+                                            "_id": "697a2a79abf32a0143589fd8",
+                                            "memberCode": "M-001",
+                                            "fullName": "Ali Raza"
+                                        },
+                            "bed_Id": {
+                                            "_id": "6977ccc4cf0a41719a64a425",
+                                            "bedNumber": "B2"
+                                        },
+                            "room_Id": {
+                                            "_id": "69775776b4b36cce90736342",
+                                            "roomNumber": "A-002"
+                                        },
+                            "endDate": null,
+                            "status": "ACTIVE",
+                            "billable": true,
+                            "rentAtAssignment": 15000,
+                            "assignedBy": {
+                                            "_id": "6974e55a276808eac7358b69",
+                                            "fullName": "Muhammad Waleed Farhan"
+                                        },
+                            "remarks": "Assigned on admission",
+                            "startDate": "2026-01-30T16:21:46.873Z",
+                            "createdAt": "2026-01-30T16:21:46.889Z",
+                            "updatedAt": "2026-01-30T16:21:46.889Z",
+                            "__v": 0
+                        }
+                    ]
+        }
+
+
+
+GET /api/bed-assignments/:id
+    ===structure===
+        {
+          
+        }
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "data": [
+                        {
+                            "_id": "697cda9a3cfec9e27de36ae4",
+                            "member_Id": {
+                                            "_id": "697a2a79abf32a0143589fd8",
+                                            "memberCode": "M-001",
+                                            "fullName": "Ali Raza"
+                                        },
+                            "bed_Id": {
+                                            "_id": "6977ccc4cf0a41719a64a425",
+                                            "bedNumber": "B2"
+                                        },
+                            "room_Id": {
+                                            "_id": "69775776b4b36cce90736342",
+                                            "roomNumber": "A-002"
+                                        },
+                            "endDate": null,
+                            "status": "ACTIVE",
+                            "billable": true,
+                            "rentAtAssignment": 15000,
+                            "assignedBy": {
+                                            "_id": "6974e55a276808eac7358b69",
+                                            "fullName": "Muhammad Waleed Farhan"
+                                        },
+                            "remarks": "Assigned on admission",
+                            "startDate": "2026-01-30T16:21:46.873Z",
+                            "createdAt": "2026-01-30T16:21:46.889Z",
+                            "updatedAt": "2026-01-30T16:21:46.889Z",
+                            "__v": 0
+                        }
+                    ]
+        }
+
+
+
+PUT /api/bed-assignments/:id/close
+    ===structure===
+        {
+
+        }
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Bed assignment closed successfully"
+        }
+
+
+PUT /api/bed-assignments/:id/
+    ===structure===
+        {
+            "status":"ACTIVE"
+        }
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Bed assignment updated successfully",
+            "data": {
+                        "_id": "697cda9a3cfec9e27de36ae4",
+                        "member_Id": "697a2a79abf32a0143589fd8",
+                        "bed_Id": "6977ccc4cf0a41719a64a425",
+                        "room_Id": "69775776b4b36cce90736342",
+                        "endDate": "2026-01-30T16:27:49.321Z",
+                        "status": "ACTIVE",
+                        "billable": true,
+                        "rentAtAssignment": 15000,
+                        "assignedBy": "6974e55a276808eac7358b69",
+                        "remarks": "Assigned on admission",
+                        "startDate": "2026-01-30T16:21:46.873Z",
+                        "createdAt": "2026-01-30T16:21:46.889Z",
+                        "updatedAt": "2026-01-30T16:31:04.537Z",
+                        "__v": 0
+                    }
+        }
+
+
+
+DELETE /api/bed-assignments/:id/     //To delete Bed Assignemnt first close it 
