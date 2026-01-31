@@ -22,6 +22,7 @@ exports.signup = async (req, res) => {
     const { fullName, email, password, roleId, phone, isActive } = req.body;
     console.log(req.body);
     const role = await Role.findById(roleId);
+    console.log("role",role);
     if (!role || !role.isActive) {
       return res.status(400).json({ message: "Invalid role" });
     }

@@ -5,10 +5,11 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
 
-const connectDB = require("./config/db");
-
 // Load env variables
 dotenv.config();
+
+const connectDB = require("./config/db");
+
 
 // Initialize app
 const app = express();

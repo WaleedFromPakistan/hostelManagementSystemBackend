@@ -39,7 +39,7 @@ router.get(
 router.put(
   "/:id/close",
   protect,
-  hasPermission("CLOSE_BED_ASSIGNMENT"),
+  hasPermission("CLOSE_BED_ASSIGNMENTS"),
   bedAssignmentController.closeBedAssignment
 );
 
@@ -47,7 +47,7 @@ router.put(
 router.put(
   "/:id",
   protect,
-  hasPermission("UPDATE_BED_ASSIGNMENT"),
+  hasPermission("UPDATE_BED_ASSIGNMENTS"),
   bedAssignmentController.updateBedAssignment
 );
 
@@ -55,7 +55,7 @@ router.put(
 router.delete(
   "/:id",
   protect,
-  hasPermission("DELETE_BED_ASSIGNMENT"),
+  hasPermission("DELETE_BED_ASSIGNMENTS"),
   bedAssignmentController.deleteBedAssignment
 );
 

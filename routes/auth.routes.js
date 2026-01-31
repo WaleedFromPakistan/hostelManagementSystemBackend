@@ -12,8 +12,8 @@ const { hasPermission } = require("../middleware/permission.middleware");
 // Admin creates users
 router.post(
   "/signup",
-  //protect,
-  //hasPermission("USER_CREATE"),
+  protect,
+  hasPermission("USER_CREATE"),
   authController.signup
 );
 
