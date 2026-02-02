@@ -1508,3 +1508,329 @@ GET /api/bed-assignments/member/:id/
 
 
 DELETE /api/bed-assignments/:id/     //To delete Bed Assignemnt first close it 
+
+
+====================================
+            Visitors ✅
+====================================
+POST /api/visitors
+    ===structure===
+       {
+            "visitorName": "Ahmed Khan",
+            "visitorPhone": "0301-1234567",
+            "visitorCNIC": "35202-1234567-1",
+            "purpose": "Meeting with member",
+            "member": "697e3b8987bf8ae927d7ac6b",
+            "remarks": "First time visit"
+        }
+
+
+
+    ===Reponse===
+       {
+            "success": true,
+            "data": {
+                        "visitorName": "Ahmed Khan",
+                        "visitorPhone": "0301-1234567",
+                        "visitorCNIC": "35202-1234567-1",
+                        "purpose": "Meeting with member",
+                        "member": "697e3b8987bf8ae927d7ac6b",
+                        "status": "IN",
+                        "loggedBy": "697df0d77398110cffe12d0e",
+                        "remarks": "First time visit",
+                        "_id": "6981111abf389a019be2185b",
+                        "inTime": "2026-02-02T21:03:22.107Z",
+                        "createdAt": "2026-02-02T21:03:22.109Z",
+                        "updatedAt": "2026-02-02T21:03:22.109Z",
+                        "__v": 0
+                    }
+        }
+
+
+
+
+GET /api/visitors
+    ===structure===
+       {
+           
+       }
+
+
+
+    ===Reponse===
+       {
+            "success": true,
+            "count": 2,
+            "data": [
+                        {
+                            "_id": "698112dbbf389a019be21860",
+                            "visitorName": "Rohan",
+                            "visitorPhone": "0301-1234569",
+                            "visitorCNIC": "35202-1234507-1",
+                            "purpose": "Meeting with member",
+                            "member": {
+                                            "_id": "697e6a5e9a290b2897b63ac7"
+                                      },
+                            "status": "IN",
+                            "loggedBy": {
+                                            "_id": "697df0d77398110cffe12d0e"
+                                        },
+                            "remarks": "Second time visit",
+                            "inTime": "2026-02-02T21:10:51.812Z",
+                            "createdAt": "2026-02-02T21:10:51.813Z",
+                            "updatedAt": "2026-02-02T21:10:51.813Z",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "6981111abf389a019be2185b",
+                            "visitorName": "Ahmed Khan",
+                            "visitorPhone": "0301-1234567",
+                            "visitorCNIC": "35202-1234567-1",
+                            "purpose": "Meeting with member",
+                            "member": {
+                                            "_id": "697e3b8987bf8ae927d7ac6b"
+                                      },
+                            "status": "IN",
+                            "loggedBy": {
+                                            "_id": "697df0d77398110cffe12d0e"
+                                        },
+                            "remarks": "First time visit",
+                            "inTime": "2026-02-02T21:03:22.107Z",
+                            "createdAt": "2026-02-02T21:03:22.109Z",
+                            "updatedAt": "2026-02-02T21:03:22.109Z",
+                            "__v": 0
+                        }
+                    ]
+            }
+
+
+
+GET /api/visitor/:id
+    ===structure===
+       {
+            
+       }
+
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "data": {
+                        "_id": "698112dbbf389a019be21860",
+                        "visitorName": "Rohan",
+                        "visitorPhone": "0301-1234569",
+                        "visitorCNIC": "35202-1234507-1",
+                        "purpose": "Meeting with member",
+                        "member": {
+                                        "_id": "697e6a5e9a290b2897b63ac7"
+                                  },
+                        "status": "IN",
+                        "loggedBy": {
+                                        "_id": "697df0d77398110cffe12d0e"
+                                    },
+                        "remarks": "Second time visit",
+                        "inTime": "2026-02-02T21:10:51.812Z",
+                        "createdAt": "2026-02-02T21:10:51.813Z",
+                        "updatedAt": "2026-02-02T21:10:51.813Z",
+                        "__v": 0
+                    }
+        }
+
+
+
+PUT /api/visitors/:id/checkout
+    ===structure===
+       {
+       
+       }
+
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "data": {
+                        "_id": "698112dbbf389a019be21860",
+                        "visitorName": "Rohan",
+                        "visitorPhone": "0301-1234569",
+                        "visitorCNIC": "35202-1234507-1",
+                        "purpose": "Meeting with member",
+                        "member": "697e6a5e9a290b2897b63ac7",
+                        "status": "OUT",
+                        "loggedBy": "697df0d77398110cffe12d0e",
+                        "remarks": "Second time visit",
+                        "inTime": "2026-02-02T21:10:51.812Z",
+                        "createdAt": "2026-02-02T21:10:51.813Z",
+                        "updatedAt": "2026-02-02T21:25:24.942Z",
+                        "__v": 0,
+                        "outTime": "2026-02-02T21:25:24.940Z"
+                    }
+        }
+
+
+
+DELETE /api/visitors/:id
+    ===structure===
+       {
+            
+       }
+
+
+
+    ===Reponse===
+       {
+            "success": true,
+            "message": "Visitor record deleted"
+        }
+
+
+
+
+====================================
+            Food Items ✅
+====================================
+POST /api/food-items/
+    ===structure===
+       {
+            "name": "Chicken Omelette",
+            "category": "BREAKFAST",
+            "price": 250,
+            "isActive": true
+        }
+
+
+
+    ===Reponse===
+       {
+            "success": true,
+            "message": "Food item created successfully",
+            "data": {
+                        "name": "Chicken Omelette",
+                        "category": "BREAKFAST",
+                        "price": 250,
+                        "isActive": true,
+                        "createdBy": "697df0d77398110cffe12d0e",
+                        "_id": "698119e2bf389a019be218c8",
+                        "createdAt": "2026-02-02T21:40:50.409Z",
+                        "updatedAt": "2026-02-02T21:40:50.409Z",
+                        "__v": 0
+                    }
+        }
+
+
+
+
+GET /api/food-items/
+    ===structure===
+       {
+            
+       }
+
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "count": 7,
+            "data": [
+                        {
+                            "_id": "69811c8cbf389a019be218e6",
+                            "name": "Cold Drink",
+                            "category": "SNACK",
+                            "price": 90,
+                            "isActive": true,
+                            "createdBy": {
+                                            "_id": "697df0d77398110cffe12d0e",
+                                            "fullName": "Adit Sharma"
+                                        },
+                            "createdAt": "2026-02-02T21:52:12.055Z",
+                            "updatedAt": "2026-02-02T21:52:12.055Z",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "69811c79bf389a019be218e1",
+                            "name": "Beef Korma",
+                            "category": "DINNER",
+                            "price": 600,
+                            "isActive": true,
+                            "createdBy": {
+                                            "_id": "697df0d77398110cffe12d0e",
+                                            "fullName": "Adit Sharma"
+                                        },
+                                            "createdAt": "2026-02-02T21:51:53.196Z",
+                                            "updatedAt": "2026-02-02T21:51:53.196Z",
+                            "__v": 0
+                        },  
+                    ]
+        }
+
+
+
+GET /api/food-items/:id
+    ===structure===
+       {
+        
+       }
+
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "data": {
+                        "_id": "69811c8cbf389a019be218e6",
+                        "name": "Cold Drink",
+                        "category": "SNACK",
+                        "price": 90,
+                        "isActive": true,
+                        "createdBy": {
+                                        "_id": "697df0d77398110cffe12d0e",
+                                        "fullName": "Adit Sharma"
+                                    },
+                        "createdAt": "2026-02-02T21:52:12.055Z",
+                        "updatedAt": "2026-02-02T21:52:12.055Z",
+                        "__v": 0
+                    }
+        }
+
+
+PUT /api/food-items/:id
+    ===structure===
+       {
+            "price": 250,
+        }
+
+
+
+    ===Reponse===
+       {
+            "success": true,
+            "message": "Food item updated successfully",
+            "data": {
+                        "_id": "69811c8cbf389a019be218e6",
+                        "name": "Cold Drink",
+                        "category": "SNACK",
+                        "price": 100,
+                        "isActive": true,
+                        "createdBy": "697df0d77398110cffe12d0e",
+                        "createdAt": "2026-02-02T21:52:12.055Z",
+                        "updatedAt": "2026-02-02T21:57:16.390Z",
+                        "__v": 0
+                    }
+        }
+
+
+DELETE /api/food-items/:id
+    ===structure===
+       {
+            
+        }
+
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Food item deactivated successfully"
+        }
