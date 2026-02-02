@@ -1836,16 +1836,3 @@ DELETE /api/food-items/:id
         }
 
 
-DELETE /api/food-items/:id
-    ===structure===
-       {
-            
-        }
-
-
-
-    ===Reponse===
-        {
-            "success": true,
-            "message": "Food item deactivated successfully"
-        }
