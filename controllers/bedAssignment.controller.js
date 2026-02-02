@@ -344,3 +344,50 @@ exports.deleteBedAssignment = async (req, res) => {
     });
   }
 };
+
+
+/*
+|--------------------------------------------------------------------------
+| GET BED ASSIGNMENTS BY MEMBER ID
+|--------------------------------------------------------------------------
+| Permission: BED_ASSIGN_VIEW
+*/
+exports.getBedAssignmentsByMemberId = async (req, res) => {
+  try {
+    const { memberId } = req.params;
+
+    if (!memberId) {
+      return res.status(400).json({
+        success: false,
+        message: "Member ID is required"
+      });
+    }
+
+    // Optional: member existence check
+    const member = await Member.findById(memberId);
+    if (!member) {
+      return res.status(404).json({
+        success: false,
+        message: "Member not found"
+      });
+    }
+
+    const assignments = await BedAssignment.find({ member_Id: memberId })
+      .populate("bed_Id", "bedNumber status")
+      .populate("room_Id", "roomNumber floor")
+      .populate("assignedBy", "fullName")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: assignments.length,
+      data: assignments
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch bed assignments for member",
+      error: error.message
+    });
+  }
+};

@@ -1464,4 +1464,47 @@ PUT /api/bed-assignments/:id/
 
 
 
+GET /api/bed-assignments/member/:id/
+    ===structure===
+        {
+     
+        }
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "count": 1,
+            "data": [
+                        {
+                            "_id": "697fc2a80b15a11f66eb67a3",
+                            "member_Id": "697e6a5e9a290b2897b63ac7",
+                            "bed_Id": {
+                                            "_id": "697e27ae7315168fd10efa76",
+                                            "bedNumber": "A2",
+                                            "status": "OCCUPIED"
+                                      },
+                            "room_Id": {
+                                            "_id": "697e25367315168fd10efa38",
+                                            "roomNumber": "A-103",
+                                            "floor": 1
+                                        },
+                            "endDate": null,
+                            "status": "ACTIVE",
+                            "billable": true,
+                            "rentAtAssignment": 8500,
+                            "assignedBy": {
+                                            "_id": "697df0d77398110cffe12d0e",
+                                            "fullName": "Adit Sharma"
+                                           },
+                            "startDate": "2026-02-01T21:16:24.215Z",
+                            "createdAt": "2026-02-01T21:16:24.217Z",
+                            "updatedAt": "2026-02-01T21:16:24.217Z",
+                            "__v": 0
+                        }
+                    ]
+        }
+
+
+
 DELETE /api/bed-assignments/:id/     //To delete Bed Assignemnt first close it 

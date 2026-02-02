@@ -59,4 +59,11 @@ router.delete(
   bedAssignmentController.deleteBedAssignment
 );
 
+// GET assignments by member
+router.get(
+  "/member/:memberId",
+  bedAssignmentController.getBedAssignmentsByMemberId
+);
+
+
 module.exports = router;
