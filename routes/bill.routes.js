@@ -13,17 +13,7 @@ const {
 const { protect } = require("../middleware/auth.middleware");
 const { hasPermission } = require("../middleware/permission.middleware");
 
-/*
-|--------------------------------------------------------------------------
-| BILL ROUTES
-|--------------------------------------------------------------------------
-| Base: /api/bills
-*/
 
-/**
- * CREATE BILL
- * Permission: BILL_CREATE
- */
 router.post(
   "/",
   protect,

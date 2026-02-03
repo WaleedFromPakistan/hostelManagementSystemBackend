@@ -1836,3 +1836,735 @@ DELETE /api/food-items/:id
         }
 
 
+
+====================================
+            Food Orders ✅
+====================================
+POST /api/food-orders/
+    ===structure===
+        {
+            "member": "697e6a5e9a290b2897b63ac7",
+            "foodItems": [
+                            {
+                                "foodItemId": "698119e2bf389a019be218c8",
+                                "quantity": 2
+                            },
+                            {
+                                "foodItemId": "69811bfabf389a019be218cd",
+                                "quantity": 1
+                            }
+                        ],
+            "remarks": "Morning breakfast"
+        }
+
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Food order created successfully",
+            "data": {
+                        "member": "697e6a5e9a290b2897b63ac7",
+                        "foodItems": [
+                                        {
+                                            "foodItemId": "698119e2bf389a019be218c8",
+                                            "name": "Chicken Omelette",
+                                            "category": "BREAKFAST",
+                                            "quantity": 2,
+                                            "price": 250,
+                                            "totalPrice": 500
+                                        },
+                                        {
+                                            "foodItemId": "69811bfabf389a019be218cd",
+                                            "name": "Paratha",
+                                            "category": "BREAKFAST",
+                                            "quantity": 1,
+                                            "price": 80,
+                                            "totalPrice": 80
+                                        }
+                                    ],
+                        "orderedBy": "697df0d77398110cffe12d0e",
+                        "totalAmount": 580,
+                        "isBilled": false,
+                        "remarks": "Morning breakfast",
+                        "isActive": true,
+                        "_id": "6981fb912bbe4d6b41bbebba",
+                        "orderDate": "2026-02-02T19:00:00.000Z",
+                        "createdAt": "2026-02-03T13:43:45.436Z",
+                        "updatedAt": "2026-02-03T13:43:45.436Z",
+                        "__v": 0
+                    }
+        }
+
+
+
+
+GET /api/food-orders/
+    ===structure===
+        {
+           
+        }
+
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "count": 2,
+            "data": [
+                        {
+                            "_id": "6981fb7112ebfe6c8393275c",
+                            "member": {
+                                            "_id": "697e6a5e9a290b2897b63ac7",
+                                            "memberCode": "M-002",
+                                            "fullName": "Adit Sharma"
+                                        },
+                            "foodItems": [
+                                            {
+                                                "foodItemId": "698119e2bf389a019be218c8",
+                                                "name": "Chicken Omelette",
+                                                "category": "BREAKFAST",
+                                                "quantity": 2,
+                                                "price": 250,
+                                                "totalPrice": 500
+                                            },
+                                            {
+                                                "foodItemId": "69811bfabf389a019be218cd",
+                                                "name": "Paratha",
+                                                "category": "BREAKFAST",
+                                                "quantity": 1,
+                                                "price": 80,
+                                                "totalPrice": 80
+                                            }
+                                        ],
+                            "orderedBy": {
+                                                "_id": "697df0d77398110cffe12d0e",
+                                                "fullName": "Adit Sharma"
+                                            },
+                            "totalAmount": 580,
+                            "isBilled": false,
+                            "remarks": "Morning breakfast",
+                            "isActive": true,
+                            "orderDate": "2026-02-02T19:00:00.000Z",
+                            "createdAt": "2026-02-03T13:43:13.065Z",
+                            "updatedAt": "2026-02-03T13:43:13.065Z",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "6981fb912bbe4d6b41bbebba",
+                            "member": {
+                                        "_id": "697e6a5e9a290b2897b63ac7",
+                                        "memberCode": "M-002",
+                                        "fullName": "Adit Sharma"
+                                    },
+                            "foodItems": [
+                                            {
+                                                "foodItemId": "698119e2bf389a019be218c8",
+                                                "name": "Chicken Omelette",
+                                                "category": "BREAKFAST",
+                                                "quantity": 2,
+                                                "price": 250,
+                                                "totalPrice": 500
+                                            },
+                                            {
+                                                "foodItemId": "69811bfabf389a019be218cd",
+                                                "name": "Paratha",
+                                                "category": "BREAKFAST",
+                                                "quantity": 1,
+                                                "price": 80,
+                                                "totalPrice": 80
+                                            }
+                                        ],
+                            "orderedBy": {
+                                            "_id": "697df0d77398110cffe12d0e",
+                                            "fullName": "Adit Sharma"
+                                        },
+                            "totalAmount": 580,
+                            "isBilled": false,
+                            "remarks": "Morning breakfast",
+                            "isActive": true,
+                            "orderDate": "2026-02-02T19:00:00.000Z",
+                            "createdAt": "2026-02-03T13:43:45.436Z",
+                            "updatedAt": "2026-02-03T13:43:45.436Z",
+                            "__v": 0
+                        }
+                    ]
+        }
+
+
+
+
+GET /api/food-orders/member/:id
+    ===structure===
+        {
+           
+        }
+
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "count": 2,
+            "data": [
+                        {
+                            "_id": "6981fb7112ebfe6c8393275c",
+                            "member": {
+                                            "_id": "697e6a5e9a290b2897b63ac7",
+                                            "memberCode": "M-002",
+                                            "fullName": "Adit Sharma"
+                                        },
+                            "foodItems": [
+                                            {
+                                                "foodItemId": "698119e2bf389a019be218c8",
+                                                "name": "Chicken Omelette",
+                                                "category": "BREAKFAST",
+                                                "quantity": 2,
+                                                "price": 250,
+                                                "totalPrice": 500
+                                            },
+                                            {
+                                                "foodItemId": "69811bfabf389a019be218cd",
+                                                "name": "Paratha",
+                                                "category": "BREAKFAST",
+                                                "quantity": 1,
+                                                "price": 80,
+                                                "totalPrice": 80
+                                            }
+                                        ],
+                            "orderedBy": {
+                                                "_id": "697df0d77398110cffe12d0e",
+                                                "fullName": "Adit Sharma"
+                                            },
+                            "totalAmount": 580,
+                            "isBilled": false,
+                            "remarks": "Morning breakfast",
+                            "isActive": true,
+                            "orderDate": "2026-02-02T19:00:00.000Z",
+                            "createdAt": "2026-02-03T13:43:13.065Z",
+                            "updatedAt": "2026-02-03T13:43:13.065Z",
+                            "__v": 0
+                        },
+                        {
+                            "_id": "6981fb912bbe4d6b41bbebba",
+                            "member": {
+                                        "_id": "697e6a5e9a290b2897b63ac7",
+                                        "memberCode": "M-002",
+                                        "fullName": "Adit Sharma"
+                                    },
+                            "foodItems": [
+                                            {
+                                                "foodItemId": "698119e2bf389a019be218c8",
+                                                "name": "Chicken Omelette",
+                                                "category": "BREAKFAST",
+                                                "quantity": 2,
+                                                "price": 250,
+                                                "totalPrice": 500
+                                            },
+                                            {
+                                                "foodItemId": "69811bfabf389a019be218cd",
+                                                "name": "Paratha",
+                                                "category": "BREAKFAST",
+                                                "quantity": 1,
+                                                "price": 80,
+                                                "totalPrice": 80
+                                            }
+                                        ],
+                            "orderedBy": {
+                                            "_id": "697df0d77398110cffe12d0e",
+                                            "fullName": "Adit Sharma"
+                                        },
+                            "totalAmount": 580,
+                            "isBilled": false,
+                            "remarks": "Morning breakfast",
+                            "isActive": true,
+                            "orderDate": "2026-02-02T19:00:00.000Z",
+                            "createdAt": "2026-02-03T13:43:45.436Z",
+                            "updatedAt": "2026-02-03T13:43:45.436Z",
+                            "__v": 0
+                        }
+                    ]
+        }
+
+
+
+PUT /api/food-orders/:id
+    ===structure===
+      {
+        "foodItems": [
+                        {
+                            "foodItemId": "698119e2bf389a019be218c8",
+                            "quantity": 2
+                        },
+                        {
+                            "foodItemId": "69811bfabf389a019be218cd",
+                            "quantity": 9
+                        }   
+                    ]
+        }
+
+
+
+
+    ===Reponse===
+       {
+            "success": true,
+            "message": "Food order updated successfully",
+            "data": {
+                        "_id": "6981fb912bbe4d6b41bbebba",
+                        "member": "697e6a5e9a290b2897b63ac7",
+                        "foodItems": [
+                                        {
+                                            "foodItemId": "698119e2bf389a019be218c8",
+                                            "name": "Chicken Omelette",
+                                            "category": "BREAKFAST",
+                                            "quantity": 2,
+                                            "price": 250
+                                        },
+                                        {
+                                            "foodItemId": "69811bfabf389a019be218cd",
+                                            "name": "Paratha",
+                                            "category": "BREAKFAST",
+                                            "quantity": 9,
+                                            "price": 80
+                                        }
+                                    ],
+                        "orderedBy": "697df0d77398110cffe12d0e",
+                        "totalAmount": 1220,
+                        "isBilled": false,
+                        "remarks": "Morning breakfast",
+                        "isActive": true,
+                        "orderDate": "2026-02-02T19:00:00.000Z",
+                        "createdAt": "2026-02-03T13:43:45.436Z",
+                        "updatedAt": "2026-02-03T14:39:29.914Z",
+                        "__v": 3
+                    }
+        }
+
+
+PUT /api/food-orders/:id/billing
+    ===structure===
+     {
+          "isBilled":true
+     }
+
+
+    ===Reponse===
+    {
+        "success": true,
+        "message": "Order billing status updated to true",
+        "data": {
+                    "isBilled": true,
+                    "_id": "6981fb912bbe4d6b41bbebba",
+                    "member": "697e6a5e9a290b2897b63ac7",
+                    "foodItems": [
+                                    {
+                                        "foodItemId": "698119e2bf389a019be218c8",
+                                        "name": "Chicken Omelette",
+                                        "category": "BREAKFAST",
+                                        "quantity": 2,
+                                        "price": 250
+                                    },
+                                    {
+                                        "foodItemId": "69811bfabf389a019be218cd",
+                                        "name": "Paratha",
+                                        "category": "BREAKFAST",
+                                        "quantity": 9,
+                                        "price": 80
+                                    }
+                                ],
+                    "orderedBy": "697df0d77398110cffe12d0e",
+                    "totalAmount": 1220,
+                    "remarks": "Morning breakfast",
+                    "isActive": true,
+                    "orderDate": "2026-02-02T19:00:00.000Z",
+                    "createdAt": "2026-02-03T13:43:45.436Z",
+                    "updatedAt": "2026-02-03T14:43:36.748Z",
+                    "__v": 3
+                }
+    }
+
+
+
+DELETE /api/food-orders/:id/
+    ===structure===
+     {
+
+     }
+
+
+    ===Reponse===
+    {
+        "success": true,
+        "message": "Food order deleted successfully"
+    }
+
+
+====================================
+            Bill ✅
+====================================
+POST /api/bills/
+    ===structure===
+      {
+         "member": "697e6a5e9a290b2897b63ac7",
+         "billMonth": "2026-02",
+         "extraItems": [
+                            { "title": "Late Fine", "amount": 500 },
+                            { "title": "Damage Charges", "amount": 1200 }
+                        ],
+        "remarks": "February bill"
+        }
+
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "message": "Bill created successfully",
+            "data": {
+                        "member": "697e6a5e9a290b2897b63ac7",
+                        "billNumber": "0001",
+                        "billMonth": "2026-02",
+                        "items": [
+                                    {
+                                        "title": "Room Rent",
+                                        "amount": 8500
+                                    },
+                                    {
+                                         "title": "Mess Charges",
+                                         "amount": 1460
+                                    }
+                                ],
+                        "totalAmount": 8500,
+                        "paidAmount": 0,
+                        "status": "UNPAID",
+                        "generatedBy": "697df0d77398110cffe12d0e",
+                        "remarks": "February bill",
+                        "_id": "6982124e605ddea577d7959e",
+                        "createdAt": "2026-02-03T15:20:46.607Z",
+                        "updatedAt": "2026-02-03T15:20:46.607Z",
+                        "dueAmount": 8500,
+                        "__v": 0
+                    }
+        }
+
+
+GET /api/bills/
+    ===structure===
+      {
+        
+      }
+
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "count": 1,
+            "data":
+                [  
+                    {
+                        "member": "697e6a5e9a290b2897b63ac7",
+                        "billNumber": "0001",
+                        "billMonth": "2026-02",
+                        "items": [
+                                    {
+                                        "title": "Room Rent",
+                                        "amount": 8500
+                                    },
+                                    {
+                                         "title": "Mess Charges",
+                                         "amount": 1460
+                                    }
+                                ],
+                        "totalAmount": 8500,
+                        "paidAmount": 0,
+                        "status": "UNPAID",
+                        "generatedBy": "697df0d77398110cffe12d0e",
+                        "remarks": "February bill",
+                        "_id": "6982124e605ddea577d7959e",
+                        "createdAt": "2026-02-03T15:20:46.607Z",
+                        "updatedAt": "2026-02-03T15:20:46.607Z",
+                        "dueAmount": 8500,
+                        "__v": 0
+                    }
+                
+            ]
+        }
+
+
+
+GET /api/bills/:id
+    ===structure===
+      {
+        
+      }
+
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "data": 
+                    {
+                        "member": "697e6a5e9a290b2897b63ac7",
+                        "billNumber": "0001",
+                        "billMonth": "2026-02",
+                        "items": [
+                                    {
+                                        "title": "Room Rent",
+                                        "amount": 8500
+                                    },
+                                    {
+                                         "title": "Mess Charges",
+                                         "amount": 1460
+                                    }
+                                ],
+                        "totalAmount": 8500,
+                        "paidAmount": 0,
+                        "status": "UNPAID",
+                        "generatedBy": "697df0d77398110cffe12d0e",
+                        "remarks": "February bill",
+                        "_id": "6982124e605ddea577d7959e",
+                        "createdAt": "2026-02-03T15:20:46.607Z",
+                        "updatedAt": "2026-02-03T15:20:46.607Z",
+                        "dueAmount": 8500,
+                        "__v": 0
+                    }
+                
+        }
+
+
+
+POST /api/bills/:id/payment
+    ===structure===
+      {
+        "amount": 8960
+      }
+
+
+
+    ===Reponse===
+        {
+            "success": true,
+            "data": 
+                    {
+                        "_id": "6982244e8e8d1c903db7c678",
+                        "member": "697e6a5e9a290b2897b63ac7",
+                        "billNumber": "0001",
+                        "billMonth": "2026-02",
+                        "items": [
+                                    {
+                                        "title": "Room Rent",
+                                        "amount": 8500
+                                    },
+                                    {
+                                         "title": "Mess Charges",
+                                         "amount": 1460
+                                    }
+                                ],
+                        "totalAmount": 8500,
+                        "paidAmount": 9960,
+                        "status": "PAID",
+                        "generatedBy": "697df0d77398110cffe12d0e",
+                        "remarks": "February bill",
+                        "_id": "6982124e605ddea577d7959e",
+                        "createdAt": "2026-02-03T15:20:46.607Z",
+                        "updatedAt": "2026-02-03T15:20:46.607Z",
+                        "dueAmount": 0,
+                        "__v": 0
+                    }
+                
+        }
+
+
+
+PUT /api/bills/:id
+    ===structure===
+      {
+        "remarks": "Mid Feburary Bill"  //only remarks can be updated
+      }
+
+
+
+    ===Reponse===
+    {
+        "success":true,
+         data:{
+                 _id: new ObjectId('6982244e8e8d1c903db7c678'),
+                member: new ObjectId('697e6a5e9a290b2897b63ac7'),
+                billNumber: '0001',
+                billMonth: '2026-02',
+                items: [
+                            { title: 'Room Rent', amount: 8500 },
+                            { title: 'Mess Charges', amount: 1460 }
+                        ],
+                totalAmount: 9960,
+                paidAmount: 9960,
+                status: 'PAID',
+                generatedBy: new ObjectId('697df0d77398110cffe12d0e'),
+                remarks: 'February bill',
+                createdAt: 2026-02-03T16:37:34.017Z,
+                updatedAt: 2026-02-03T16:39:03.389Z,
+                dueAmount: 0,
+                __v: 0
+            }
+    }
+
+
+DELETE /api/bills/:id
+    ===structure===
+      {
+                //Paid Bills can not be deleted
+      }
+
+
+
+    ===Reponse===
+         {
+            "success": false,
+            "message": "Bill with payments cannot be deleted"
+        }
+
+
+
+====================================
+            Dashboard ✅
+====================================
+POST /api/dashboard/refresh
+    ===structure===
+      {
+         
+      }
+
+
+
+    ===Reponse===
+{
+  "success": true,
+  "message": "Dashboard stats refreshed",
+  "data": {
+    "users": {
+      "total": 1,
+      "active": 1,
+      "byRole": [
+        {
+          "role": "Admin",
+          "count": 1,
+          "_id": "69822afe48d4d5c4c4970bdd"
+        }
+      ]
+    },
+    "members": {
+      "total": 5,
+      "active": 4,
+      "onLeave": 1,
+      "left": 0
+    },
+    "rooms": {
+      "totalRooms": 10,
+      "availableRooms": 8
+    },
+    "beds": {
+      "totalBeds": 8,
+      "occupiedBeds": 4,
+      "availableBeds": 4
+    },
+    "bedAssignments": {
+      "active": 4,
+      "closed": 1
+    },
+    "mess": {
+      "todayOrders": 4,
+      "todayRevenue": 1460,
+      "monthRevenue": 1460
+    },
+    "billing": {
+      "totalBills": 1,
+      "unpaidBills": 0,
+      "partialBills": 0,
+      "paidBills": 1,
+      "totalRevenue": 9960,
+      "totalDue": 0
+    },
+    "visitors": {
+      "todayVisitors": 1,
+      "currentlyInside": 1
+    },
+    "_id": "69822afef0d53117def0bde3",
+    "date": "2026-02-02T19:00:00.000Z",
+    "__v": 0,
+    "createdAt": "2026-02-03T17:06:06.866Z",
+    "lastUpdatedAt": "2026-02-03T17:06:06.859Z",
+    "updatedAt": "2026-02-03T17:06:06.866Z"
+  }
+}
+
+
+GET /api/dashboard/stats
+    ===structure===
+      {
+         
+      }
+
+
+
+    ===Reponse===
+{
+  "success": true,
+  "data": {
+    "users": {
+      "total": 1,
+      "active": 1,
+      "byRole": [
+        {
+          "role": "Admin",
+          "count": 1,
+          "_id": "69822afe48d4d5c4c4970bdd"
+        }
+      ]
+    },
+    "members": {
+      "total": 5,
+      "active": 4,
+      "onLeave": 1,
+      "left": 0
+    },
+    "rooms": {
+      "totalRooms": 10,
+      "availableRooms": 8
+    },
+    "beds": {
+      "totalBeds": 8,
+      "occupiedBeds": 4,
+      "availableBeds": 4
+    },
+    "bedAssignments": {
+      "active": 4,
+      "closed": 1
+    },
+    "mess": {
+      "todayOrders": 4,
+      "todayRevenue": 1460,
+      "monthRevenue": 1460
+    },
+    "billing": {
+      "totalBills": 1,
+      "unpaidBills": 0,
+      "partialBills": 0,
+      "paidBills": 1,
+      "totalRevenue": 9960,
+      "totalDue": 0
+    },
+    "visitors": {
+      "todayVisitors": 1,
+      "currentlyInside": 1
+    },
+    "_id": "69822afef0d53117def0bde3",
+    "date": "2026-02-02T19:00:00.000Z",
+    "__v": 0,
+    "createdAt": "2026-02-03T17:06:06.866Z",
+    "lastUpdatedAt": "2026-02-03T17:06:06.859Z",
+    "updatedAt": "2026-02-03T17:06:06.866Z"
+  }
+}

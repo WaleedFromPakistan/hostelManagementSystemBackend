@@ -1,6 +1,7 @@
 const Bill = require("../models/bill.model");
 const FoodOrder = require("../models/foodOrder.model");
 const BedAssignment = require("../models/bedAssignment.model");
+const Member = require("../models/member.model");
 
 /*
 |--------------------------------------------------------------------------
@@ -9,28 +10,52 @@ const BedAssignment = require("../models/bedAssignment.model");
 */
 exports.createBill = async (req, res) => {
   try {
-    const { member, billMonth, remarks } = req.body;
+    const { member, extraItems = [], remarks } = req.body;
 
-    if (!member || !billMonth) {
+    if (!member) {
       return res.status(400).json({
         success: false,
-        message: "member and billMonth are required"
+        message: "member is required"
+      });
+    }
+
+    /*
+    |-------------------------------------------------
+    | AUTO BILL MONTH (YYYY-MM)
+    |-------------------------------------------------
+    */
+    const now = new Date();
+    const billMonth =
+      req.body.billMonth ||
+      `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+
+    /*
+    |-------------------------------------------------
+    | VALIDATE MEMBER
+    |-------------------------------------------------
+    */
+    const memberExists = await Member.findById(member);
+    if (!memberExists || !memberExists.isActive) {
+      return res.status(404).json({
+        success: false,
+        message: "Member not found or inactive"
       });
     }
 
     const items = [];
 
     /*
-    |----------------------------------
-    | ROOM RENT (from active assignment)
-    |----------------------------------
+    |-------------------------------------------------
+    | BED RENT (ACTIVE ASSIGNMENT)
+    |-------------------------------------------------
     */
     const activeAssignment = await BedAssignment.findOne({
       member_Id: member,
-      status: "ACTIVE"
-    }).populate("room_Id");
+      status: "ACTIVE",
+      billable: true
+    });
 
-    if (activeAssignment && activeAssignment.billable) {
+    if (activeAssignment) {
       items.push({
         title: "Room Rent",
         amount: activeAssignment.rentAtAssignment
@@ -38,39 +63,102 @@ exports.createBill = async (req, res) => {
     }
 
     /*
-    |----------------------------------
-    | FOOD ORDERS (unbilled)
-    |----------------------------------
+    |-------------------------------------------------
+    | FOOD ORDERS → REALTIME MESS CHARGES
+    |-------------------------------------------------
     */
     const foodOrders = await FoodOrder.find({
       member,
-      isBilled: false
+      isBilled: false,
+      isActive: true
     });
+    console.log("Unbilled Food Orders:", foodOrders);
+    let messTotal = 0;
 
     foodOrders.forEach(order => {
-      items.push({
-        title: `Food Order (${order.mealType})`,
-        amount: order.totalPrice
-      });
+      const orderTotal = order.foodItems.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
+      messTotal += orderTotal;
     });
 
+    if (messTotal > 0) {
+      items.push({
+        title: "Mess Charges",
+        amount: messTotal
+      });
+    }
+
     /*
-    |----------------------------------
+    |-------------------------------------------------
+    | OPTIONAL EXTRA ITEMS
+    |-------------------------------------------------
+    */
+    if (Array.isArray(extraItems)) {
+      extraItems.forEach(item => {
+        if (item?.title && item?.amount > 0) {
+          items.push({
+            title: item.title,
+            amount: item.amount
+          });
+        }
+      });
+    }
+
+    /*
+    |-------------------------------------------------
+    | NO BILLABLE ITEMS
+    |-------------------------------------------------
+    */
+    if (items.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No billable items found for this member"
+      });
+    }
+
+    /*
+    |-------------------------------------------------
+    | REALTIME TOTAL BILL AMOUNT
+    |-------------------------------------------------
+    */
+    const totalAmount = items.reduce(
+      (sum, item) => sum + item.amount,
+      0
+    );
+
+    /*
+    |-------------------------------------------------
+    | AUTO BILL NUMBER
+    |-------------------------------------------------
+    */
+    const lastBill = await Bill.findOne().sort({ createdAt: -1 });
+
+    let billNumber = "0001";
+    if (lastBill?.billNumber) {
+      billNumber = String(parseInt(lastBill.billNumber, 10) + 1).padStart(4, "0");
+    }
+
+    /*
+    |-------------------------------------------------
     | CREATE BILL
-    |----------------------------------
+    |-------------------------------------------------
     */
     const bill = await Bill.create({
       member,
+      billNumber,
       billMonth,
       items,
+      totalAmount,
       remarks,
       generatedBy: req.user.id
     });
 
     /*
-    |----------------------------------
+    |-------------------------------------------------
     | MARK FOOD ORDERS AS BILLED
-    |----------------------------------
+    |-------------------------------------------------
     */
     if (foodOrders.length > 0) {
       await FoodOrder.updateMany(
@@ -81,12 +169,14 @@ exports.createBill = async (req, res) => {
 
     res.status(201).json({
       success: true,
+      message: "Bill created successfully",
       data: bill
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message
+      message: "Failed to create bill",
+      error: error.message
     });
   }
 };
@@ -159,7 +249,7 @@ exports.getBillById = async (req, res) => {
 exports.updateBill = async (req, res) => {
   try {
     const bill = await Bill.findById(req.params.id);
-
+    console.log("Bill to Update:", bill);
     if (!bill) {
       return res.status(404).json({
         success: false,

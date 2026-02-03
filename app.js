@@ -39,11 +39,11 @@ app.use("/api/rooms/",require("./routes/room.routes"));
 app.use("/api/beds/",require("./routes/bed.routes"));
 app.use("/api/members/",require("./routes/member.routes"));
 app.use("/api/bed-assignments/",require("./routes/bedAssignment.routes"));
-app.use("/api/attendances/",require("./routes/attendance.routes"));
-app.use("/api/bill/s/",require("./routes/bill.routes"));
+app.use("/api/bills/",require("./routes/bill.routes"));
 app.use("/api/food-items/",require("./routes/foodItem.routes"));
 app.use("/api/food-orders/",require("./routes/foodOrder.routes"));
 app.use("/api/visitors/",require("./routes/visitor.routes"));
+app.use("/api/dashboard/",require("./routes/dashboardStats.routes"));
 // Health check route (optional but smart)
 app.get("/", (req, res) => {
   res.json({ status: "API running" });

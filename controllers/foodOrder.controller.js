@@ -1,32 +1,33 @@
 const FoodOrder = require("../models/foodOrder.model");
-const FoodItem = require("../models/foodItem.model");
 const Member = require("../models/member.model");
+const FoodItem = require("../models/foodItem.model");
 
 /*
 |--------------------------------------------------------------------------
 | CREATE FOOD ORDER
 |--------------------------------------------------------------------------
-| Permission: CREATE_FOOD_ORDER
+| member + foodItems required
 */
 exports.createFoodOrder = async (req, res) => {
   try {
-    const {
-      member,
-      foodItems,
-      quantity,
-      mealType,
-      orderDate,
-      remarks
-    } = req.body;
+    const { member, foodItems, remarks } = req.body;
 
-    if (!member || !foodItems || foodItems.length === 0 || !quantity || !mealType) {
+    /*
+      Expected foodItems format from UI:
+      foodItems: [
+        { foodItem: "FOOD_ITEM_ID", quantity: 2 },
+        { foodItem: "FOOD_ITEM_ID", quantity: 1 }
+      ]
+    */
+
+    if (!member || !Array.isArray(foodItems) || foodItems.length === 0) {
       return res.status(400).json({
         success: false,
-        message: "Required fields are missing"
+        message: "Member and foodItems are required"
       });
     }
 
-    // Validate member
+    // Check member
     const memberExists = await Member.findById(member);
     if (!memberExists || !memberExists.isActive) {
       return res.status(404).json({
@@ -35,28 +36,44 @@ exports.createFoodOrder = async (req, res) => {
       });
     }
 
-    // Validate food items
-    const itemsCount = await FoodItem.countDocuments({
-      _id: { $in: foodItems },
+    // Extract food item IDs
+    const foodItemIds = foodItems.map(i => i.foodItemId);
+
+    // Fetch food items from DB
+    const dbFoodItems = await FoodItem.find({
+      _id: { $in: foodItemIds },
       isActive: true
     });
-
-    if (itemsCount !== foodItems.length) {
+    console.log("DB Food Items:", dbFoodItems);
+    if (dbFoodItems.length !== foodItemIds.length) {
       return res.status(400).json({
         success: false,
         message: "One or more food items are invalid or inactive"
       });
     }
+    // Build snapshot items (VERY IMPORTANT)
+    const finalFoodItems = foodItems.map(item => {
+      const dbItem = dbFoodItems.find(
+        f => f._id.toString() === item.foodItemId
+      );
+      
+      return {
+        foodItemId: dbItem._id,
+        name: dbItem.name,
+        category: dbItem.category,
+        price: dbItem.price,
+        quantity: item.quantity,
+        totalPrice: dbItem.price * item.quantity
+      };
+    });
 
     const order = await FoodOrder.create({
       member,
-      foodItems,
-      quantity,
-      mealType,
-      orderDate: orderDate || new Date(),
+      foodItems: finalFoodItems,
       orderedBy: req.user.id,
       remarks
     });
+          console.log("yahan tak chal raha ");
 
     res.status(201).json({
       success: true,
@@ -71,26 +88,21 @@ exports.createFoodOrder = async (req, res) => {
     });
   }
 };
-
 /*
 |--------------------------------------------------------------------------
 | GET ALL FOOD ORDERS
 |--------------------------------------------------------------------------
-| Permission: VIEW_FOOD_ORDER
 */
 exports.getAllFoodOrders = async (req, res) => {
   try {
-    const { date, mealType, isBilled } = req.query;
+    const { isBilled, date } = req.query;
 
-    const filter = {};
-
+    const filter = { isActive: true };
+    if (isBilled !== undefined) filter.isBilled = isBilled;
     if (date) filter.orderDate = new Date(date);
-    if (mealType) filter.mealType = mealType;
-    if (isBilled !== undefined) filter.isBilled = isBilled === "true";
 
     const orders = await FoodOrder.find(filter)
       .populate("member", "memberCode fullName")
-      .populate("foodItems", "name price")
       .populate("orderedBy", "fullName")
       .sort({ orderDate: -1 });
 
@@ -110,32 +122,26 @@ exports.getAllFoodOrders = async (req, res) => {
 
 /*
 |--------------------------------------------------------------------------
-| GET FOOD ORDER BY ID
+| GET FOOD ORDERS BY MEMBER
 |--------------------------------------------------------------------------
-| Permission: VIEW_FOOD_ORDER
 */
-exports.getFoodOrderById = async (req, res) => {
+exports.getFoodOrdersByMember = async (req, res) => {
   try {
-    const order = await FoodOrder.findById(req.params.id)
-      .populate("member")
-      .populate("foodItems")
-      .populate("orderedBy", "fullName");
-
-    if (!order) {
-      return res.status(404).json({
-        success: false,
-        message: "Food order not found"
-      });
-    }
+    const orders = await FoodOrder.find({
+      member: req.params.memberId,
+      isActive: true
+    })
+      .sort({ orderDate: -1 });
 
     res.status(200).json({
       success: true,
-      data: order
+      count: orders.length,
+      data: orders
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Failed to fetch food order",
+      message: "Failed to fetch member food orders",
       error: error.message
     });
   }
@@ -143,17 +149,15 @@ exports.getFoodOrderById = async (req, res) => {
 
 /*
 |--------------------------------------------------------------------------
-| UPDATE FOOD ORDER (remarks / quantity only)
+| UPDATE FOOD ORDER (remarks / foodItems only)
 |--------------------------------------------------------------------------
-| Permission: UPDATE_FOOD_ORDER
 */
 exports.updateFoodOrder = async (req, res) => {
   try {
-    const { quantity, remarks } = req.body;
+    const { foodItems, remarks } = req.body;
 
     const order = await FoodOrder.findById(req.params.id);
-
-    if (!order) {
+    if (!order || !order.isActive) {
       return res.status(404).json({
         success: false,
         message: "Food order not found"
@@ -167,8 +171,39 @@ exports.updateFoodOrder = async (req, res) => {
       });
     }
 
-    if (quantity) order.quantity = quantity;
-    if (remarks) order.remarks = remarks;
+    /*
+    |--------------------------------------------------------------------------
+    | AUTO SNAPSHOT BUILDING
+    |--------------------------------------------------------------------------
+    | Client only sends:
+    | [{ foodItemId, quantity }]
+    */
+    if (foodItems && Array.isArray(foodItems)) {
+      const populatedItems = [];
+
+      for (const item of foodItems) {
+        const foodItem = await FoodItem.findById(item.foodItemId);
+        if (!foodItem) {
+          return res.status(400).json({
+            success: false,
+            message: `Invalid food item ID: ${item.foodItemId}`
+          });
+        }
+
+        populatedItems.push({
+          foodItemId: foodItem._id,
+          name: foodItem.name,
+          category: foodItem.category,
+          quantity: item.quantity || 1,
+          price: foodItem.price
+        });
+      }
+
+      order.foodItems = populatedItems;
+      // totalAmount auto-calc ho ga via pre-save hook
+    }
+
+    if (remarks !== undefined) order.remarks = remarks;
 
     await order.save();
 
@@ -185,17 +220,16 @@ exports.updateFoodOrder = async (req, res) => {
     });
   }
 };
-
 /*
 |--------------------------------------------------------------------------
-| MARK ORDER AS BILLED
+| MARK ORDER AS BILLED / UNBILLED
 |--------------------------------------------------------------------------
-| Permission: BILL_FOOD_ORDER
 */
-exports.markOrderAsBilled = async (req, res) => {
+exports.updateBillingStatus = async (req, res) => {
   try {
-    const order = await FoodOrder.findById(req.params.id);
+    const { isBilled } = req.body;
 
+    const order = await FoodOrder.findById(req.params.id);
     if (!order) {
       return res.status(404).json({
         success: false,
@@ -203,17 +237,18 @@ exports.markOrderAsBilled = async (req, res) => {
       });
     }
 
-    order.isBilled = true;
+    order.isBilled = isBilled;
     await order.save();
 
     res.status(200).json({
       success: true,
-      message: "Food order marked as billed"
+      message: `Order billing status updated to ${isBilled}`,
+      data: order
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Failed to mark order as billed",
+      message: "Failed to update billing status",
       error: error.message
     });
   }
@@ -221,9 +256,8 @@ exports.markOrderAsBilled = async (req, res) => {
 
 /*
 |--------------------------------------------------------------------------
-| DELETE FOOD ORDER (Soft logic via billing)
+| SOFT DELETE FOOD ORDER
 |--------------------------------------------------------------------------
-| Permission: DELETE_FOOD_ORDER
 */
 exports.deleteFoodOrder = async (req, res) => {
   try {
@@ -236,14 +270,8 @@ exports.deleteFoodOrder = async (req, res) => {
       });
     }
 
-    if (order.isBilled) {
-      return res.status(400).json({
-        success: false,
-        message: "Billed order cannot be deleted"
-      });
-    }
-
-    await order.deleteOne();
+    order.isActive = false;
+    await order.save();
 
     res.status(200).json({
       success: true,

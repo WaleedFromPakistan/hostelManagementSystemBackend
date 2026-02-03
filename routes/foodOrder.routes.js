@@ -6,11 +6,10 @@ const { protect } = require("../middleware/auth.middleware");
 const { hasPermission } = require("../middleware/permission.middleware");
 /*
 |--------------------------------------------------------------------------
-| FOOD ORDER ROUTES
+| CREATE FOOD ORDER
 |--------------------------------------------------------------------------
+| Permission: FOOD_ORDER_CREATE
 */
-
-// Create food order
 router.post(
   "/",
   protect,
@@ -18,7 +17,12 @@ router.post(
   foodOrderController.createFoodOrder
 );
 
-// Get all food orders (filters: date, mealType, isBilled)
+/*
+|--------------------------------------------------------------------------
+| GET ALL FOOD ORDERS
+|--------------------------------------------------------------------------
+| Permission: FOOD_ORDER_VIEW
+*/
 router.get(
   "/",
   protect,
@@ -26,15 +30,25 @@ router.get(
   foodOrderController.getAllFoodOrders
 );
 
-// Get food order by ID
+/*
+|--------------------------------------------------------------------------
+| GET FOOD ORDERS BY MEMBER
+|--------------------------------------------------------------------------
+| Permission: FOOD_ORDER_VIEW
+*/
 router.get(
-  "/:id",
+  "/member/:memberId",
   protect,
   hasPermission("VIEW_FOOD_ORDER"),
-  foodOrderController.getFoodOrderById
+  foodOrderController.getFoodOrdersByMember
 );
 
-// Update food order (quantity / remarks only)
+/*
+|--------------------------------------------------------------------------
+| UPDATE FOOD ORDER (foodItems / remarks)
+|--------------------------------------------------------------------------
+| Permission: FOOD_ORDER_UPDATE
+*/
 router.put(
   "/:id",
   protect,
@@ -42,15 +56,25 @@ router.put(
   foodOrderController.updateFoodOrder
 );
 
-// Mark food order as billed
-router.patch(
-  "/:id/bill",
+/*
+|--------------------------------------------------------------------------
+| UPDATE BILLING STATUS (isBilled)
+|--------------------------------------------------------------------------
+| Permission: FOOD_ORDER_BILL
+*/
+router.put(
+  "/:id/billing",
   protect,
   hasPermission("BILL_FOOD_ORDER"),
-  foodOrderController.markOrderAsBilled
+  foodOrderController.updateBillingStatus
 );
 
-// Delete food order (only if not billed)
+/*
+|--------------------------------------------------------------------------
+| DELETE FOOD ORDER (Soft Delete)
+|--------------------------------------------------------------------------
+| Permission: FOOD_ORDER_DELETE
+*/
 router.delete(
   "/:id",
   protect,
