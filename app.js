@@ -17,9 +17,22 @@ const app = express();
 // Connect Database
 connectDB();
 
+const allowedOrigins = [
+  "http://localhost:5174",
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://yourdomain.com"
+];
+
+
+
 // Global Middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+
 app.use(helmet());
 app.use(morgan("dev"));
 
