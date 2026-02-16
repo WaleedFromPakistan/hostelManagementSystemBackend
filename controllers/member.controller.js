@@ -83,7 +83,7 @@ exports.getAllMembers = async (req, res) => {
 
     const members = await Member.find(filter)
     .sort({ createdAt: -1})
-      
+      console.log(members);
     res.status(200).json({
       success: true,
       count: members.length,

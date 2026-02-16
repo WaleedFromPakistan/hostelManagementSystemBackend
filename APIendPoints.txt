@@ -1516,36 +1516,41 @@ DELETE /api/bed-assignments/:id/     //To delete Bed Assignemnt first close it
 POST /api/visitors
     ===structure===
        {
-            "visitorName": "Ahmed Khan",
-            "visitorPhone": "0301-1234567",
-            "visitorCNIC": "35202-1234567-1",
-            "purpose": "Meeting with member",
-            "member": "697e3b8987bf8ae927d7ac6b",
-            "remarks": "First time visit"
+            "visitorName": "Ali Raza",
+            "visitorPhone": "03001234567",
+            "idProof": {
+                            "type": "AADHAR_CARD",
+                            "number": "1234-5678-9012"
+                        },
+            "purpose": "Meeting",
+            "member": "65f1a2b3c4d5e6f789012345",
+            "remarks": "Friend from university"
         }
 
 
 
     ===Reponse===
-       {
+        {
             "success": true,
             "data": {
-                        "visitorName": "Ahmed Khan",
-                        "visitorPhone": "0301-1234567",
-                        "visitorCNIC": "35202-1234567-1",
-                        "purpose": "Meeting with member",
-                        "member": "697e3b8987bf8ae927d7ac6b",
+                        "visitorName": "Ali Raza",
+                        "visitorPhone": "03001234567",
+                        "idProof": {
+                                        "type": "AADHAR_CARD",
+                                        "number": "1234-5678-9012"
+                                    },
+                        "purpose": "Meeting",
+                        "member": "65f1a2b3c4d5e6f789012345",
                         "status": "IN",
                         "loggedBy": "697df0d77398110cffe12d0e",
-                        "remarks": "First time visit",
-                        "_id": "6981111abf389a019be2185b",
-                        "inTime": "2026-02-02T21:03:22.107Z",
-                        "createdAt": "2026-02-02T21:03:22.109Z",
-                        "updatedAt": "2026-02-02T21:03:22.109Z",
+                        "remarks": "Friend from university",
+                        "_id": "69933457a443a1f912cda1e0",
+                        "inTime": "2026-02-16T15:14:31.104Z",
+                        "createdAt": "2026-02-16T15:14:31.111Z",
+                        "updatedAt": "2026-02-16T15:14:31.111Z",
                         "__v": 0
                     }
         }
-
 
 
 

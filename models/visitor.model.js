@@ -13,9 +13,24 @@ const visitorSchema = new mongoose.Schema(
       trim: true
     },
 
-    visitorCNIC: {
-      type: String,
-      trim: true
+    // 🔥 ID Proof Object (Dropdown Based)
+    idProof: {
+      type: {
+        type: String,
+        required: true,
+        enum: [
+          "AADHAR_CARD",
+          "DRIVING_LICENSE",
+          "PASSPORT",
+          "VOTER_ID",
+          "OTHER"
+        ]
+      },
+      number: {
+        type: String,
+        required: true,
+        trim: true
+      }
     },
 
     purpose: {
@@ -64,18 +79,13 @@ const visitorSchema = new mongoose.Schema(
 );
 
 /*
-|----------------------------------------------------------------------
-| INDEXES (Performance matters, sadly)
-|----------------------------------------------------------------------
+|--------------------------------------------------------------------------
+| INDEXES
+|--------------------------------------------------------------------------
 */
 
-// Fast daily visitor logs
 visitorSchema.index({ createdAt: -1 });
-
-// Member-wise visitor history
 visitorSchema.index({ member: 1, createdAt: -1 });
-
-// Status tracking (who is still inside 👀)
 visitorSchema.index({ status: 1 });
 
 module.exports = mongoose.model("Visitor", visitorSchema);

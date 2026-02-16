@@ -1,15 +1,47 @@
 const Visitor = require("../models/visitor.model");
 
 /*
-|------------------------------------------------------------------
+|--------------------------------------------------------------------------
 | VISITOR CHECK-IN
-|------------------------------------------------------------------
+|--------------------------------------------------------------------------
 | New visitor entry
 */
 exports.checkInVisitor = async (req, res) => {
   try {
+    const {
+      visitorName,
+      visitorPhone,
+      idProof,
+      purpose,
+      member,
+      remarks
+    } = req.body;
+
+    // 🔒 Basic validation
+    if (!visitorName || !purpose || !member) {
+      return res.status(400).json({
+        success: false,
+        message: "visitorName, purpose and member are required"
+      });
+    }
+
+    if (!idProof || !idProof.type || !idProof.number) {
+      return res.status(400).json({
+        success: false,
+        message: "ID proof type and number are required"
+      });
+    }
+
     const visitor = await Visitor.create({
-      ...req.body,
+      visitorName,
+      visitorPhone,
+      idProof: {
+        type: idProof.type,
+        number: idProof.number
+      },
+      purpose,
+      member,
+      remarks,
       loggedBy: req.user.id
     });
 
@@ -17,6 +49,7 @@ exports.checkInVisitor = async (req, res) => {
       success: true,
       data: visitor
     });
+
   } catch (error) {
     res.status(400).json({
       success: false,
@@ -26,9 +59,9 @@ exports.checkInVisitor = async (req, res) => {
 };
 
 /*
-|------------------------------------------------------------------
+|--------------------------------------------------------------------------
 | VISITOR CHECK-OUT
-|------------------------------------------------------------------
+|--------------------------------------------------------------------------
 | Marks visitor OUT with outTime
 */
 exports.checkOutVisitor = async (req, res) => {
@@ -59,6 +92,7 @@ exports.checkOutVisitor = async (req, res) => {
       success: true,
       data: visitor
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -68,9 +102,9 @@ exports.checkOutVisitor = async (req, res) => {
 };
 
 /*
-|------------------------------------------------------------------
+|--------------------------------------------------------------------------
 | GET ALL VISITORS (Filters supported)
-|------------------------------------------------------------------
+|--------------------------------------------------------------------------
 */
 exports.getAllVisitors = async (req, res) => {
   try {
@@ -78,6 +112,7 @@ exports.getAllVisitors = async (req, res) => {
 
     if (req.query.member) filter.member = req.query.member;
     if (req.query.status) filter.status = req.query.status;
+    if (req.query.idType) filter["idProof.type"] = req.query.idType;
 
     const visitors = await Visitor.find(filter)
       .populate("member", "name room bed")
@@ -89,6 +124,7 @@ exports.getAllVisitors = async (req, res) => {
       count: visitors.length,
       data: visitors
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -98,9 +134,9 @@ exports.getAllVisitors = async (req, res) => {
 };
 
 /*
-|------------------------------------------------------------------
+|--------------------------------------------------------------------------
 | GET SINGLE VISITOR
-|------------------------------------------------------------------
+|--------------------------------------------------------------------------
 */
 exports.getVisitorById = async (req, res) => {
   try {
@@ -119,6 +155,7 @@ exports.getVisitorById = async (req, res) => {
       success: true,
       data: visitor
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -128,9 +165,9 @@ exports.getVisitorById = async (req, res) => {
 };
 
 /*
-|------------------------------------------------------------------
+|--------------------------------------------------------------------------
 | DELETE VISITOR (Only if OUT)
-|------------------------------------------------------------------
+|--------------------------------------------------------------------------
 */
 exports.deleteVisitor = async (req, res) => {
   try {
@@ -156,6 +193,7 @@ exports.deleteVisitor = async (req, res) => {
       success: true,
       message: "Visitor record deleted"
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
