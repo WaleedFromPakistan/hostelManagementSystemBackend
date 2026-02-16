@@ -1567,24 +1567,20 @@ GET /api/visitors
             "success": true,
             "count": 2,
             "data": [
-                        {
-                            "_id": "698112dbbf389a019be21860",
-                            "visitorName": "Rohan",
-                            "visitorPhone": "0301-1234569",
-                            "visitorCNIC": "35202-1234507-1",
-                            "purpose": "Meeting with member",
-                            "member": {
-                                            "_id": "697e6a5e9a290b2897b63ac7"
-                                      },
+                       {
+                            "idProof": {
+                                            "type": "AADHAR_CARD",
+                                            "number": "1234-5678-9012"
+                                        },
+                            "_id": "69933457a443a1f912cda1e0",
+                            "visitorName": "Ali Raza",
+                            "visitorPhone": "03001234567",
+                            "purpose": "Meeting",
+                            "member": null,
                             "status": "IN",
                             "loggedBy": {
                                             "_id": "697df0d77398110cffe12d0e"
-                                        },
-                            "remarks": "Second time visit",
-                            "inTime": "2026-02-02T21:10:51.812Z",
-                            "createdAt": "2026-02-02T21:10:51.813Z",
-                            "updatedAt": "2026-02-02T21:10:51.813Z",
-                            "__v": 0
+                                        }
                         },
                         {
                             "_id": "6981111abf389a019be2185b",
