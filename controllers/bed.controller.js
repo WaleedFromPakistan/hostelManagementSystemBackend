@@ -54,17 +54,16 @@ exports.createBed = async (req, res) => {
 */
 exports.getAllBeds = async (req, res) => {
   try {
-    const { room_Id, status } = req.query;
+//    const { room_Id, status } = req.query;
 
-    const filter = { isActive: true };
+  //  const filter = { isActive: true };
 
-    if (room_Id) filter.room_Id = room_Id;
-    if (status) filter.status = status;
-
-    const beds = await Bed.find(filter)
+    //if (room_Id) filter.room_Id = room_Id;
+    //if (status) filter.status = status;
+    const beds = await Bed.find()
       .populate("room_Id", "roomNumber floor")
       .sort({ bedNumber: 1 });
-
+      //console.log(beds);
     res.status(200).json({
       success: true,
       count: beds.length,
@@ -235,7 +234,7 @@ exports.getBedsByRoom = async (req, res) => {
       room_Id: roomId,
       isActive: true
     })
-      .populate("room_Id", "roomNumber")
+      .populate("room_Id", "roomNumber roomType")
       .sort({ bedNumber: 1 });
 
     res.status(200).json({
@@ -312,7 +311,7 @@ exports.changeStatusById = async (req, res) => {
 exports.activateById = async (req, res) => {
   try {
     const bed = await Bed.findById(req.params.id);
-
+    //console.log("Bed to activate:", bed);
     if (!bed) {
       return res.status(404).json({
         success: false,

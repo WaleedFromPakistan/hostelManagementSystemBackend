@@ -36,7 +36,7 @@ exports.createMember = async (req, res) => {
     if (exists) {
       return res.status(400).json({
         success: false,
-        message: "Member with same code or CNIC already exists"
+        message: "Member with same code or ID already exists"
       });
     }
 
@@ -78,12 +78,11 @@ exports.getAllMembers = async (req, res) => {
   try {
     const { status } = req.query;
 
-    const filter = { isActive: true };
-    if (status) filter.status = status;
+    //const filter = { isActive: true };
+    //if (status) filter.status = status;
 
-    const members = await Member.find(filter)
+    const members = await Member.find()
     .sort({ createdAt: -1})
-      console.log(members);
     res.status(200).json({
       success: true,
       count: members.length,

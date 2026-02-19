@@ -43,6 +43,7 @@ exports.refreshDashboardStats = async (req, res) => {
        MEMBERS
     ========================= */
     const totalMembers = await Member.countDocuments();
+    console.log("Total Members:", totalMembers);
     const activeMembers = await Member.countDocuments({ status: "ACTIVE" });
     const onLeaveMembers = await Member.countDocuments({ status: "ON_LEAVE" });
     const leftMembers = await Member.countDocuments({ status: "LEFT" });

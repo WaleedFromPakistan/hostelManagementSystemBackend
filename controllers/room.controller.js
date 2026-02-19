@@ -68,7 +68,7 @@ exports.getRooms = async (req, res) => {
     if (floor) filter.floor = floor;
 
     const rooms = await Room.find(filter).sort({ floor: 1, roomNumber: 1 });
-
+    console.log(rooms);
     res.status(200).json({
       success: true,
       count: rooms.length,
