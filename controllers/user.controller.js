@@ -44,7 +44,8 @@ exports.updateUser = async (req, res) => {
       req.body,
       { new: true }
     ).select("-password");
-
+    console.log("Updated user:", updatedUser);
+    console.log("Request body:", req.body);
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }

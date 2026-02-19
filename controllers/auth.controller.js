@@ -19,11 +19,11 @@ const generateToken = (user) => {
 ========================= */
 exports.signup = async (req, res) => {
   try {
-    const { fullName, email, password, roleId, phone, isActive } = req.body;
+    const { fullName, email, password, role, phone, isActive } = req.body;
     console.log(req.body);
-    const role = await Role.findById(roleId);
-    console.log("role",role);
-    if (!role || !role.isActive) {
+    const roleDoc = await Role.findById(role);
+    console.log("role",roleDoc);
+    if (!roleDoc || !roleDoc.isActive) {
       return res.status(400).json({ message: "Invalid role" });
     }
 
@@ -39,7 +39,7 @@ console.log("yahan tak agaya");
       email,
       password:hashedPassword,
       phone,
-      role: role._id,
+      role: roleDoc._id,
       isActive,
     });
     
